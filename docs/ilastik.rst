@@ -89,7 +89,7 @@ See [LINK TO FIJI INSTALL in a sister doc]
 
 -  IDR data \ https://idr.openmicroscopy.org/webclient/?show=screen-102
 
--  Script used \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/orbit/segmentation.groovy
+-  Script used [LINK to SCRIPTs]
 
 **Step-by-step:**
 -----------------
