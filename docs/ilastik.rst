@@ -36,31 +36,19 @@ steps one and two described for the multi-z images above.
 
 We will show:
 
--  How to manually open images from OMERO in Ilastik using the Fiji
-      plugin for OMERO and Fiji plugin for Ilastik
+-  How to manually open images from OMERO in Ilastik using the Fiji plugin for OMERO and Fiji plugin for Ilastik
 
--  How to segment the multi-z images in Ilastik and produce an Ilastik
-      Project (ilp file) recording the steps
+-  How to segment the multi-z images in Ilastik and produce an Ilastik Project (ilp file) recording the steps
 
--  How to save the results of the segmentation (ROIs and Probability
-      maps) in OMERO, using the manual workflow and Fiji
+-  How to save the results of the segmentation (ROIs and Probability maps) in OMERO, using the manual workflow and Fiji
 
--  How to run a script in Fiji, consuming the ilp file and running the
-      segmentation of the images coming from an OMERO Dataset, saving
-      the ROIs on the original images in OMERO
+-  How to run a script in Fiji, consuming the ilp file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
 
--  How to run a python script, not using Fiji, but directly connecting
-      OMERO and Ilastik consuming the ilp file and running the
-      segmentation of the images coming from an OMERO Dataset, saving
-      the ROIs on the original images in OMERO
+-  How to run a python script, not using Fiji, but directly connecting OMERO and Ilastik consuming the ilp file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
 
--  How to perform tracking on timelapse images of mitotic cells open
-      from OMERO via Fiji into the Ilastik user interface and producing
-      timelapses showing lineage of the cells
+-  How to perform tracking on timelapse images of mitotic cells open from OMERO via Fiji into the Ilastik user interface and producing timelapses showing lineage of the cells
 
--  How to use the ilp file containing the tracking parameters in a
-      script producing a lineage timelapses of the cells for a whole
-      Plate of timelapses stored in OMERO
+-  How to use the ilp file containing the tracking parameters in a script producing a lineage timelapses of the cells for a whole Plate of timelapses stored in OMERO
 
 Setup:
 ------
