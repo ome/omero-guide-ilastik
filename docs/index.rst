@@ -1,5 +1,5 @@
-Welcome to guide template's documentation!
-==========================================
+ilastik
+=======
 
 Contents:
 
