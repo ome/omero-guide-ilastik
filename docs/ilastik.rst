@@ -346,9 +346,6 @@ tracking workflow, see [LINK to MITOCHECK PYTHON SCRIPT]
 .. |image3a| image:: images/ilastik4.png
    :width: 1.82292in
    :height: 1.71354in
-.. |image4| image:: images/ilastik8.png
-   :width: 3.32292in
-   :height: 1.95833in
 .. |image5| image:: images/ilastik12.png
    :width: 5.40104in
    :height: 4.94396in
