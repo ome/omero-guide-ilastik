@@ -69,7 +69,7 @@ not necessarily alphabetically ordered.
 
 **OMERO plugin for Fiji installation instructions**
 
-See [LINK TO FIJI INSTALL in a sister doc]
+See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 
 **Resources**
 -------------
@@ -78,7 +78,9 @@ See [LINK TO FIJI INSTALL in a sister doc]
 
 -  IDR data \ https://idr.openmicroscopy.org/webclient/?show=screen-102
 
--  Script used [LINK to SCRIPTs]
+-  Script using Fiji \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy
+
+- Python Notebook \ https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
 
 **Step-by-step**
 ----------------
@@ -214,7 +216,7 @@ Manual creation of ROIs in Fiji based on segmentations from ilastik and saving t
 Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Groovy Script run in Fiji (done), find the script on [LINK to SCRIPT]:
+Groovy Script run in Fiji, find the script on \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy:
 
 #. Open images (one by one) from an OMERO Dataset (hardcoded in the script) into Fiji and export them as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
 
@@ -230,8 +232,7 @@ Scripting workflow on z-stacks using ilastik headless, python and OMERO
 Similar script, but not using Fiji, was prepared. The script performs
 the same steps as the Fiji script above, but using python arrays. The
 advantage of this approach is the ease of use and speed, as one client
-side software component (Fiji) is not used. [LINK TO PYTHON SCRIPT on
-idr0062 dataset]
+side software component (Fiji) is not used. The script is presented as a part of Notebook https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
 
 Manual workflow of Object classification on z-stacks in ilastik
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -332,7 +333,7 @@ Scripting workflow of tracking of mitosis in ilastik
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The automated pipeline using a python script was produced for the
-tracking workflow, see [LINK to MITOCHECK PYTHON SCRIPT]
+tracking workflow, see [LINK to MITOCHECK PYTHON SCRIPT - script not finished yet]
 
 .. |image0| image:: images/ilastik5.png
    :width: 1.5in
