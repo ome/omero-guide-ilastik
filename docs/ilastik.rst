@@ -234,6 +234,10 @@ the same steps as the Fiji script above, but using python arrays. The
 advantage of this approach is the ease of use and speed, as one client
 side software component (Fiji) is not used. The script is presented as a part of Notebook https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
 
+-  Go to ​\ \ https://idr-analysis.openmicroscopy.org/training\
+
+-  In the *Files > notebooks > Ilastik* folder, select the notebook *pixels_classification.ipynb*
+
 Manual workflow of Object classification on z-stacks in ilastik
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
