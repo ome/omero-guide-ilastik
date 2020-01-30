@@ -9,6 +9,8 @@ To run the notebooks, build locally with [repo2docker](https://repo2docker.readt
 
 To build locally:
 
+ * Install [Docker][https://www.docker.com/] if required
+ * Open a terminal as administrator
  * Create a virtual environment and install repo2docker from PyPI.
  * Clone this repository
  * Run ``repo2docker``
