@@ -4,7 +4,7 @@
 **Description**
 ---------------
 
-ilastik is an interactive learning and segmentation toolkit, with which
+ilastik is an interactive learning and segmentation toolkit, which
 can be used to leverage machine learning algorithms to easily segment,
 classify, track and count cells or other experimental data,
 see \ https://www.ilastik.org/\ .
@@ -13,15 +13,13 @@ In the first part, we will show how to use ilastik user interface to
 perform segmentations on multi-z images stored in OMERO. The connection
 between OMERO and ilastik is facilitated via Fiji, for which both OMERO
 and ilastik have plugins. The segmentation steps in this part are
-recorded and saved in the form of an ilp file in ilastik (and ilastik
+recorded and saved in the form of an ``ilp`` file in ilastik (ilastik
 project). The ``ilp`` file is used later for the scripting workflow.
 
 In the second part, the segmentation (using Pixel classification routine
-of ilastik) of the multi-z images is run in a batch mode. For this, ilp
-is used in a script, which runs ilastik in a headless mode, consuming
-batch of images (coming from an OMERO Dataset) and segmenting these
-images according to the parameters configured and saved in the ilp in
-the manual step above. We offer two scripts covering this workflow one
+of ilastik) of the multi-z images is run in a batch mode. For this we provide scripts which run ilastik in a headless mode. The scripts provide for ilastik a batch of images (coming from an OMERO Dataset) and ilastik is segmenting these
+images according to the parameters configured and saved in the ``ilp`` in
+the manual step above. We offer two scripts covering this workflow, one
 running in Fiji, and the other using the python frames to export images
 directly from OMERO to the ilastik running headlessly. Also, we describe
 in this part how to use ilastik routine Object classification to
@@ -30,7 +28,7 @@ classify objects on images from OMERO manually.
 In the third part, a manual tracking workflow is shown on images of
 cells undergoing mitosis. The lineage of the cells is being followed.
 The images are timelapses from the Image Data Resource, the “mitocheck”
-set. As a result of this step, again, an ilp file is produced and saved
+set. As a result of this step, again, an ``ilp`` file is produced and saved
 for further use by the follow-up scripting workflow, similarly to the
 steps one and two described for the multi-z images above.
 
@@ -38,17 +36,17 @@ We will show:
 
 -  How to manually open images from OMERO in ilastik using the Fiji plugin for OMERO and Fiji plugin for ilastik
 
--  How to segment the multi-z images in ilastik and produce an ilastik Project (ilp file) recording the steps
+-  How to segment the multi-z images in ilastik and produce an ilastik Project (``ilp`` file) recording the steps
 
 -  How to save the results of the segmentation (ROIs and Probability maps) in OMERO, using the manual workflow and Fiji
 
--  How to run a script in Fiji, consuming the ilp file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
+-  How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
 
--  How to run a python script, not using Fiji, but directly connecting OMERO and ilastik consuming the ilp file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
+-  How to run a python script, not using Fiji, but directly connecting OMERO and ilastik, consuming the ``ilp`` file and running the Pixel classification on the images coming from an OMERO Dataset and saving the produced probability map images in OMERO
 
 -  How to perform tracking on timelapse images of mitotic cells open from OMERO via Fiji into the ilastik user interface and producing timelapses showing lineage of the cells
 
--  How to use the ilp file containing the tracking parameters in a script producing a lineage timelapses of the cells for a whole Plate of timelapses stored in OMERO
+-  How to use the ``ilp`` file containing the tracking parameters in a script producing a lineage timelapses of the cells for a whole Plate of timelapses stored in OMERO
 
 **Setup**
 ---------
@@ -104,15 +102,15 @@ Manual training of z-stack segmentation in ilastik
 
 #.  Save a new Project in ilastik.
 
-#. Still in ilastik, open the image you saved as .h5 in previous steps above (central pane, Add file button)
+#. Still in ilastik, open the image you saved as .h5 in previous steps above (central pane, ``Add file`` button)
 
-#. Three views will open, xy, xz and yz. You can explore the orthogonal views by clicking onto the checkbox in bottom right.
+#. Three views will open, xy, xz and yz. You can explore the orthogonal views by clicking onto the checkbox in bottom right corner.
 
-#. In Left-hand pane, click Feature Selection. Select all available features.
+#. In Left-hand pane, click ``Feature Selection``. Select all available features.
 
 #. You can explore the features at the bottom left corner, but this takes time…
 
-#. Click on "Training" harmonica in the Left-hand pane
+#. Click on ``Training`` harmonica in the Left-hand pane
 
 #. The training UI comes in left-hand pane with two labels already pre-defined by default.
 
@@ -220,7 +218,7 @@ Groovy Script run in Fiji, find the script on \ https://raw.githubusercontent.co
 
 #. Open images (one by one) from an OMERO Dataset (hardcoded in the script) into Fiji and export them as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
 
-#. Start headless ilastik, using the "Pixel classification:" module (done by the script from Fiji, using the ilastik plugin for Fiji). The script feeds into the "Pixel classification" ilastik module an ilastik Project (ilp file created previously manually using the workflow above), and also the raw h5 image which the script just exported to the local machine from Fjii.
+#. Start headless ilastik, using the "Pixel classification:" module (done by the script from Fiji, using the ilastik plugin for Fiji). The script feeds into the "Pixel classification" ilastik module an ilastik Project (``ilp`` file created previously manually using the workflow above), and also the raw h5 image which the script just exported to the local machine from Fjii.
 
 #. The headless ilastik "Pixel classification" module produces "Probabilities" map - this map is immediately opened into Fiji (again going via the ilastik plugin for Fiji).
 
@@ -229,10 +227,10 @@ Groovy Script run in Fiji, find the script on \ https://raw.githubusercontent.co
 Scripting workflow on z-stacks using ilastik headless, python and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Similar script, but not using Fiji, was prepared. The script performs
-the same steps as the Fiji script above, but using python arrays. The
+A python script which is not using Fiji, was prepared. The script performs
+Pixel classification steps, similar to the analogous pixel classification steps as the Fiji script above. The script uses python arrays as means of tranferring the pixel data between OMERO and ilastik. The
 advantage of this approach is the ease of use and speed, as one client
-side software component (Fiji) is not used. The script is presented as a part of Notebook https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
+side software component (Fiji) is not used. The script starts ilastik in headless mode and uses the ``ilp`` which was prepared in the manual steps above. The ``ilp`` file was attached to the OMERO dataset which contains the images to be analyzed. The script harvests this ``ilp`` from the OMERO dataset and passes it to ilastik together with the pixel data (the images). ilastik produces the probability map images. The script then saves the probability map images back to OMERO. The script is presented as a part of Notebook https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
 
 -  Go to ​\ \ https://idr-analysis.openmicroscopy.org/training\
 
