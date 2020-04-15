@@ -6,6 +6,6 @@ ilastik is a free open-source interactive learning and segmentation toolkit, wit
 Contents:
 
 .. toctree::
-   :maxdepth: 1
-
+   setup
    ilastik
+   :maxdepth: 1
