@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - ome
+  - ilastik-forge
+dependencies:
+  - zeroc-ice36-python
+  - omero-py
+  - pip
+  - ilastik-dependencies-no-solvers
+  - ilastik-meta
+  - ipywidgets
