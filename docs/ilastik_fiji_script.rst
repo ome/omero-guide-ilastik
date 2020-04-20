@@ -24,7 +24,7 @@ We will show:
 
 **ilastik installation**
 
-ilastik has been installed on the local machine. See \ https://www.ilastik.org/\  for details.
+- ilastik has been installed on the local machine. See \ https://www.ilastik.org/\  for details.
 
 **ilastik plugin for Fiji installation instructions**
 
@@ -38,7 +38,7 @@ not necessarily alphabetically ordered.
 
 **OMERO plugin for Fiji installation instructions**
 
-See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
+- For installation instructions, go to \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 
 **Resources**
 -------------
@@ -53,13 +53,59 @@ See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For this example we will use the Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`:
+For this example we will use the Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`.
+The script uses the OMERO Java API.
 
-#. Open images (one by one) from an OMERO Dataset (hardcoded in the script) into Fiji and export them as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
+Connect to the server:
 
-#. Start headless ilastik, using the "Pixel classification:" module (done by the script from Fiji, using the ilastik plugin for Fiji). The script feeds into the "Pixel classification" ilastik module an ilastik Project (``ilp`` file created previously manually using the workflow above), and also the raw h5 image which the script just exported to the local machine from Fjii.
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Connect
+    :end-before: // Load-images
 
-#. The headless ilastik "Pixel classification" module produces "Probabilities" map - this map is immediately opened into Fiji (again going via the ilastik plugin for Fiji).
+Load the images contained in the specified dataset:
 
-#. In Fiji, the Analyze Particles plugin is run on the "Probabilities" map to produce ROIs. Once the ROIs are produced, they are saved to OMERO onto the original raw image which was opened by the script as descripted in
-the manual workflow.
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Load-images
+    :end-before: // Open-image
+
+Open the images one-by-one using the Bio-Formats plugin:
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Open-image
+    :end-before: // Check-exists
+
+Export each image as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Export as h5
+    :end-before: // Close export
+
+
+Start ilastik headless, using the ``Pixel classification`` module 
+The script feeds into the ``Pixel classification`` ilastik module the ilastik Project created during the manual step and also the raw the new created h5 image in the step above.
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Import h5
+    :end-before: // end pixel classification
+
+The headless ilastik ``Pixel classification"`` module produces ``Probabilities`` map - this map is immediately opened into Fiji via the ilastik plugin for Fiji.
+
+In Fiji, the Analyze Particles plugin is run on the "Probabilities" map to produce ROIs. 
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Analyse the images
+    :end-before: // Save the ROIs
+
+
+Once the ROIs are produced, they are saved to OMERO onto the original image which.
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Save-rois
+    :end-before: // Beginning
+
+
+Disconnect when done
+
+.. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
+    :start-after: // Close the connection
+    :end-before: // End
