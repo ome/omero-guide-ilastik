@@ -57,6 +57,7 @@ def create_dataset(conn, dataset_id):
     return conn.getUpdateService().saveAndReturnObject(dataset)
 
 
+# Load-data
 def load_numpy_array(image):
     pixels = image.getPrimaryPixels()
     size_z = image.getSizeZ()
