@@ -99,6 +99,31 @@ def load_numpy_array(image):
     return numpy.stack(values)
 
 
+# Analyze-data
+def analyze(conn, images, model, new_dataset):
+    # Prepare ilastik
+    os.environ["LAZYFLOW_THREADS"] = "2"
+    os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
+    args = ilastik_main.parse_args([])
+    args.headless = True
+    args.project = model
+    shell = ilastik_main.main(args)
+    for image in images:
+        input_data = load_numpy_array(image)
+        # run ilastik headless
+        print('running ilastik using %s and %s' % (model, image.getName()))
+        data = OrderedDict([
+            (
+                "Raw Data",
+                [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
+            )])
+        predictions = shell.workflow.batchProcessingApplet.run_export(data,
+                                                                      export_to_array=True)  # noqa
+        for d in predictions:
+            save_results(conn, image, d, new_dataset)
+
+
+# Save-results
 def save_results(conn, image, data, dataset):
     filename, file_extension = os.path.splitext(image.getName())
     # Save the probabilities file as an image
@@ -126,30 +151,6 @@ def save_results(conn, image, data, dataset):
                                  description=desc, dataset=dataset)
 
 
-# Analyze data
-def analyze(conn, images, model, new_dataset):
-    # Prepare ilastik
-    os.environ["LAZYFLOW_THREADS"] = "2"
-    os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
-    args = ilastik_main.parse_args([])
-    args.headless = True
-    args.project = model
-    shell = ilastik_main.main(args)
-    for image in images:
-        input_data = load_numpy_array(image)
-        # run ilastik headless
-        print('running ilastik using %s and %s' % (model, image.getName()))
-        data = OrderedDict([
-            (
-                "Raw Data",
-                [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
-            )])
-        predictions = shell.workflow.batchProcessingApplet.run_export(data,
-                                                                      export_to_array=True)  # noqa
-        for d in predictions:
-            save_results(conn, image, d, new_dataset)
-
-
 # Disconnect
 def disconnect(conn):
     conn.close()
@@ -161,7 +162,7 @@ def main():
     host = input("Host [wss://workshop.openmicroscopy.org/omero-ws]: ") or 'wss://workshop.openmicroscopy.org/omero-ws'  # noqa
     username = input("Username [trainer-1]: ") or 'trainer-1'
     password = getpass("Password: ")
-    dataset_id = input("Dataset ID [102]: ") or '102'
+    dataset_id = input("Dataset ID [6210]: ") or '6210'
     # Connect to the server
     conn = connect(host, username, password)
 
