@@ -208,7 +208,7 @@ Manual workflow of Object classification on z-stacks in ilastik
 
     .. image:: images/ilastik15.png
 
-#. Click on ``Object information export `# harmonica.
+#. Click on ``Object information export`` harmonica.
 
 #. Changing the ``Source`` dropdown menu, export sequentially ``Object Predictions`` and ``Object Probabilities``.
 
@@ -225,6 +225,7 @@ Manual workflow of Object classification on z-stacks in ilastik
 #. Import the CSV to OMERO, as well as the Probabilities.
 
 #. Make an OMERO.table out of the CSV and attach it on the Project in OMERO. This can be done using populate_metadata.py plugin or from scratch using the extended groovy script from Fiji.
+
 
 .. |image0| image:: images/ilastik5.png
    :width: 1.5in
