@@ -1,36 +1,15 @@
-**ilastik**
-===========
+**Use ilastik as a Fiji plugin**
+================================
 
 **Description**
 ---------------
 
-ilastik is an interactive learning and segmentation toolkit, which
-can be used to leverage machine learning algorithms to easily segment,
-classify, track and count cells or other experimental data,
-see \ https://www.ilastik.org/\ .
-
-In the first part, we will show how to use ilastik user interface to
+In this section, we will show how to use ilastik user interface to
 perform segmentations on multi-z images stored in OMERO. The connection
 between OMERO and ilastik is facilitated via Fiji, for which both OMERO
 and ilastik have plugins. The segmentation steps in this part are
 recorded and saved in the form of an ``ilp`` file in ilastik (ilastik
 project). The ``ilp`` file is used later for the scripting workflow.
-
-In the second part, the segmentation (using Pixel classification routine
-of ilastik) of the multi-z images is run in a batch mode. For this we provide scripts which run ilastik in a headless mode. The scripts provide for ilastik a batch of images (coming from an OMERO Dataset) and ilastik is segmenting these
-images according to the parameters configured and saved in the ``ilp`` in
-the manual step above. We offer two scripts covering this workflow, one
-running in Fiji, and the other using the python frames to export images
-directly from OMERO to the ilastik running headlessly. Also, we describe
-in this part how to use ilastik routine Object classification to
-classify objects on images from OMERO manually.
-
-In the third part, a manual tracking workflow is shown on images of
-cells undergoing mitosis. The lineage of the cells is being followed.
-The images are timelapses from the Image Data Resource, the “mitocheck”
-set. As a result of this step, again, an ``ilp`` file is produced and saved
-for further use by the follow-up scripting workflow, similarly to the
-steps one and two described for the multi-z images above.
 
 We will show:
 
@@ -42,11 +21,8 @@ We will show:
 
 -  How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
 
--  How to run a python script, not using Fiji, but directly connecting OMERO and ilastik, consuming the ``ilp`` file and running the Pixel classification on the images coming from an OMERO Dataset and saving the produced probability map images in OMERO
+-  How to manually classify images
 
--  How to perform tracking on timelapse images of mitotic cells open from OMERO via Fiji into the ilastik user interface and producing timelapses showing lineage of the cells
-
--  How to use the ``ilp`` file containing the tracking parameters in a script producing a lineage timelapses of the cells for a whole Plate of timelapses stored in OMERO
 
 **Setup**
 ---------
@@ -74,11 +50,7 @@ See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 
 -  IDR data (idr0062) \ https://idr.openmicroscopy.org/webclient/?show=project-801
 
--  IDR data \ https://idr.openmicroscopy.org/webclient/?show=screen-102
-
 -  Script using Fiji \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy
-
-- Python Notebook \ https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
 
 **Step-by-step**
 ----------------
@@ -92,7 +64,7 @@ Manual training of z-stack segmentation in ilastik
 
 #.  After image has opened in Fiji, go to ``Plugins > ilastik > Export HDF5``. The ilastik menu item might be the last in the Plugins dropdown, not necessarily alphabetically ordered.
 
-#.  Select a local directory to export to and save the image locally as an ..h5 file.
+#.  Select a local directory to export to and save the image locally as an ``.h5`` file.
 
 #.  Repeat this step with several images from the Blastocysts Dataset of idr0062.
 
@@ -102,9 +74,9 @@ Manual training of z-stack segmentation in ilastik
 
 #.  Save a new Project in ilastik.
 
-#. Still in ilastik, open the image you saved as .h5 in previous steps above (central pane, ``Add file`` button)
+#. Still in ilastik, open the image you saved as ``.h5`` in previous steps above (central pane, ``Add file`` button).
 
-#. Three views will open, xy, xz and yz. You can explore the orthogonal views by clicking onto the checkbox in bottom right corner.
+#. Three views will open, ``xy``, ``xz`` and ``yz``. You can explore the orthogonal views by clicking onto the checkbox in bottom right corner.
 
 #. In Left-hand pane, click ``Feature Selection``. Select all available features.
 
@@ -126,7 +98,7 @@ Manual training of z-stack segmentation in ilastik
 
 #. Add new lines on cells which are too dim to be selected.
 
-#. Click on Live Update…repeat
+#. Click on Live Update... repeat
 
 #. Stop Live Update
 
@@ -156,9 +128,9 @@ Manual training of z-stack segmentation in ilastik
 
 #. First, start with selecting "imple Segmentation" In the "Choose Export Image Settings", select the "Convert to data Type" parameter to be "floating 32 bit" \ |image6a|\ . The files will be exported into the folder where the original images were, unless you choose otherwise.By default, the export format is HDF5 (file extension .h5).
 
-#. Now, select in the left-hand pane the harmonica "Batch processing". In the centre top row of the view, click on "Select Raw Data Files...". Select all the 3 raw .h5 files on your local machine, including the one you have just trained your pixel classification on. (You exported the files from OMERO via Fiji locally, using the script JM has written, see above). Click onto the "Process all data files" button in the left-hand pane.
+#. Now, select in the left-hand pane the harmonica "Batch processing". In the centre top row of the view, click on "Select Raw Data Files...". Select all the three raw ``.h5`` files on your local machine, including the one you have just trained your pixel classification on. (You exported the files from OMERO via Fiji locally, using the script JM has written, see above). Click onto the "Process all data files" button in the left-hand pane.
 
-#. This will create three .h5 files in the folder you have chosen in the "Choose Export Image Settings" window (by default, these files will be placed in the folder where your raw data exports from OMERO are), the files will be named "...Simple Segmentation.h5".
+#. This will create three ``.h5`` files in the folder you have chosen in the "Choose Export Image Settings" window (by default, these files will be placed in the folder where your raw data exports from OMERO are), the files will be named "...Simple Segmentation.h5".
 
 #. Return to "Prediction Export" harmonica, select the "Probabilities" parameter in the "Source" dropdown. Go to the “Batch processing" harmonica and click onto the “Process all data files” button in the left-hand pane. This will create another three .h5 files in the local folder, named "...Probabilities.h5".
 
@@ -167,9 +139,9 @@ Manual creation of ROIs in Fiji based on segmentations from ilastik and saving t
 
 #.  Go to Fiji, ``Plugins > Ilastik > Import...``
 
-#.  Browse to one of the "..._Simple Segmentation.h5" files which was created in ilastik in previous step and set the “Axis Order” to tzyxc (this might be the default for you). Do not check the checkbox “Apply LUT”. Click OK.
+#.  Browse to one of the "..._Simple Segmentation.h5" files which was created in ilastik in previous step and set the “Axis Order” to tzyxc (this might be the default for you). Do not check the checkbox "Apply LUT". Click OK.
 
-#.  The 3D image will open in Fiji. Select Image > Adjust > Brightness and Contrast. Adjust the “max” slider to the left, until you see the image grow grey (it is probably black just after opening).
+#.  The 3D image will open in Fiji. Select ``Image > Adjust > Brightness and Contrast``. Adjust the ``max`` slider to the left, until you see the image grow grey (it is probably black just after opening).
 
     .. image:: images/ilastik9.png
 
@@ -181,7 +153,7 @@ Manual creation of ROIs in Fiji based on segmentations from ilastik and saving t
 
 #.  Select ``Analysis > Analyze Particles``.
 
-#.  Change the “Size(pixel^2)” parameter to “50-infinity”
+#.  Change the ``Size(pixel^2)`` parameter to ``50-infinity``
 
     .. image:: images/ilastik10.png
 
@@ -210,31 +182,6 @@ Manual creation of ROIs in Fiji based on segmentations from ilastik and saving t
     .. image:: images/ilastik11.png
 
 #. Repeat this workflow with the "...Probabilities.h5" files. Also, attach the ilastik Project itself to the Dataset containing original data in OMERO.
-
-Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Groovy Script run in Fiji, find the script on \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy:
-
-#. Open images (one by one) from an OMERO Dataset (hardcoded in the script) into Fiji and export them as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
-
-#. Start headless ilastik, using the "Pixel classification:" module (done by the script from Fiji, using the ilastik plugin for Fiji). The script feeds into the "Pixel classification" ilastik module an ilastik Project (``ilp`` file created previously manually using the workflow above), and also the raw h5 image which the script just exported to the local machine from Fjii.
-
-#. The headless ilastik "Pixel classification" module produces "Probabilities" map - this map is immediately opened into Fiji (again going via the ilastik plugin for Fiji).
-
-#. In Fiji, the Analyze Particles plugin is run on the "Probabilities" map to produce ROIs. Once the ROIs are produced, they are saved to OMERO onto the original raw image which was opened by the script at step 1.  above.
-
-Scripting workflow on z-stacks using ilastik headless, python and OMERO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-A python script which is not using Fiji, was prepared. The script performs
-Pixel classification steps, similar to the analogous pixel classification steps as the Fiji script above. The script uses python arrays as means of tranferring the pixel data between OMERO and ilastik. The
-advantage of this approach is the ease of use and speed, as one client
-side software component (Fiji) is not used. The script starts ilastik in headless mode and uses the ``ilp`` which was prepared in the manual steps above. The ``ilp`` file was attached to the OMERO dataset which contains the images to be analyzed. The script harvests this ``ilp`` from the OMERO dataset and passes it to ilastik together with the pixel data (the images). ilastik produces the probability map images. The script then saves the probability map images back to OMERO. The script is presented as a part of Notebook https://github.com/ome/training-notebooks/blob/master/ilastik/pixels_classification.ipynb
-
--  Go to ​\ \ https://idr-analysis.openmicroscopy.org/training\
-
--  In the *Files > notebooks > Ilastik* folder, select the notebook *pixels_classification.ipynb*
 
 Manual workflow of Object classification on z-stacks in ilastik
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -269,9 +216,9 @@ Manual workflow of Object classification on z-stacks in ilastik
 
 #. In the "Features" harmonica, click the "All" button to export all features.
 
-#. Click OK.
+#. Click ``OK``.
 
-#. Back in the main ilastik interface, click "Export All" (repeat as necessary to export all formats of the images and the 2 formats of the export table).
+#. Back in the main ilastik interface, click "Export All" (repeat as necessary to export all formats of the images and the two formats of the export table).
 
 #. Save the Project.
 
@@ -279,63 +226,7 @@ Manual workflow of Object classification on z-stacks in ilastik
 
 #. Make an OMERO.table out of the CSV and attach it on the Project in OMERO. This can be done using populate_metadata.py plugin or from scratch using the extended groovy script from Fiji.
 
-#. Show everything in OMERO.parade…
-
-Manual workflow of tracking of mitosis in ilastik
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#. Use the steps above to do Pixel classification - open ilastik, create a new Pixel classification project, feeding in the raw data in h5 form. The data come from \ https://www.ilastik.org/download.html\ , more concretely the "Mitocheck 2D+t" download \ http://data.ilastik.org/mitocheck.zip\ . Download, unzip and feed the h5 file which has not the "export" in its name into this step (Pixel classification).
-
-#. Follow the steps of Pixel classification as described above in the idr0062 workflow - you will have to
-
-   - Adjust the parameters, saving the new project as "mitocheck-pixel-class.ilp"
-
-   - Export "Probabilities", which can be exported as "mitocheck_94570_2D+t_01-53_Probabilities.h5"
-
-   - Close and reopen ilastik. Open the projec "conservationTracking.ilp" from the folder you downloaded from the ilastik site. In the "Raw data", tab of "Input data" make sure the raw data are pointing to where you have your "mitocheck_94570_2D+t_01-53.h5" file locally. Further, in the "Prediction maps" tab of "Input data", exchange the file there by right-clicking on it and selecting the "Replace with file" and replace this file with the "mitocheck_94570_2D+t_01-53_Probabilities.h5" which you exported from the Pixel classification workflow (see points above)
-
-   - Run through the tabs in the LHP, making sure that when Thresholding, you swap the blue and yellow objects (my Pixel class. produced a probabilities map which is swapped in the sense objects vs bckgr coloring). Also, you have to manually select the cells which are dividing and not dividing in the corresponding tabs in LHP in quite a few timeframes, see \ https://www.ilastik.org/documentation/tracking/tracking#3-division-and-object-count-classifiers\  for how to do it.
-
-   - Further, you have to discern false detections, and 1 object and 2 object blobs manually on quite a few frames, the LHP harmonice is called Object Count classification, as described in \ https://www.ilastik.org/documentation/tracking/tracking#3-division-and-object-count-classifiers\ , second part.
-
-   - Once done, in the Tracking tab in left-hand paneHP, click on "Track !" button, making sure you did not change any params inadvertently. This will take a while.
-
-   - Select the “Tracking Results Export” tab in LHP and define your export target dir, then export in a row
-         - "mitocheck_94570_2D+t_01-53_Object-Identities.h5",
-         - "mitocheck_94570_2D+t_01-53_Tracking-Result.h5",
-         - "mitocheck_94570_2D+t_01-53_Merger-Result.h5" and
-         - "mitocheck_94570_2D+t_01-53_CSV-Table.h5.csv"
-
-    These are 3 timelapses and one CSV with the tracking results.
-
-   - Save the Project as "mitocheck-tracking-serious.ilp". This is the main starting point for the automatic pipeline from OMERO. The pipeline is
-
-      - "mitocheck-pixel-class.ilp" which
-
-         - consumes the "mitocheck_94570_2D+t_01-53.h5"
-         - produces the "mitocheck_94570_2D+t_01-53_Probabilities.h5"
-
- 
-      - "Mitocheck-tracking-serious.ilp" which
-
-         - consumes 
-            
-            - "mitocheck_94570_2D+t_01-53.h5"
-            - "mitocheck_94570_2D+t_01-53_Probabilities.h5"
-
-         
-         - produces the outputs
-            
-            - "mitocheck_94570_2D+t_01-53_Object-Identities.h5"
-            - "mitocheck_94570_2D+t_01-53_Tracking-Result.h5"
-            - "mitocheck_94570_2D+t_01-53_Merger-Result.h5"
-            - "mitocheck_94570_2D+t_01-53_CSV-Table.h5.csv"
-
-Scripting workflow of tracking of mitosis in ilastik
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The automated pipeline using a python script was produced for the
-tracking workflow, see [LINK to MITOCHECK PYTHON SCRIPT - script not finished yet]
+#. Show everything in OMERO.parade...
 
 .. |image0| image:: images/ilastik5.png
    :width: 1.5in
@@ -379,3 +270,4 @@ tracking workflow, see [LINK to MITOCHECK PYTHON SCRIPT - script not finished ye
 .. |image14a| image:: images/ilastik16.png
    :width: 5.04167in
    :height: 0.32292in
+
