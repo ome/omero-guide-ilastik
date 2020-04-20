@@ -62,6 +62,7 @@ import ij.plugin.frame.RoiManager
 import ij.measure.ResultsTable
 
 
+// Connect to omero
 def connect_to_omero() {
     "Connect to OMERO"
 
@@ -77,6 +78,7 @@ def connect_to_omero() {
 
 }
 
+// Load-images
 def get_images(gateway, ctx, dataset_id) {
     "List all images contained in a Dataset"
 
@@ -86,6 +88,7 @@ def get_images(gateway, ctx, dataset_id) {
     return browse.getImagesForDatasets(ctx, ids)
 }
 
+// Open-image
 def open_image_plus(HOST, USERNAME, PASSWORD, PORT, group_id, image_id) {
     "Open the image using the Bio-Formats Importer"
 
@@ -108,6 +111,7 @@ def open_image_plus(HOST, USERNAME, PASSWORD, PORT, group_id, image_id) {
 }
 
 
+// Check-exists
 def file_exists(name, list) {
     for (i = 0; i < list.length; i++) {
         if (name.equals(list[i].toString())) {
@@ -117,35 +121,17 @@ def file_exists(name, list) {
     return false
 }
 
+// Save-rois
 def save_rois_to_omero(ctx, image_id, imp) {
     " Save ROI's back to OMERO"
     reader = new ROIReader()
     roi_list = reader.readImageJROIFromSources(image_id, imp)
     roi_facility = gateway.getFacility(ROIFacility)
     result = roi_facility.saveROIs(ctx, image_id, exp_id, roi_list)
-
-    roivec = new ArrayList()
-    j = result.iterator()
-    while (j.hasNext()) {
-        roidata = j.next()
-        roi_id = roidata.getId()
-
-        i = roidata.getIterator()
-        while (i.hasNext()) {
-            roi = i.next()
-            shape = roi[0]
-            t = shape.getZ()
-            z = shape.getT()
-            c = shape.getC()
-            shape_id = shape.getId()
-            roivec.add([roi_id, shape_id, z, c, t])
-        }
-    }
-    return roivec
 }
 
-//Beginning of script
-//Choose a directory where to save the .h5 file
+// Beginning of script
+// Choose a directory where to save the .h5 file
 data_dir = IJ.getDirectory("Choose a directory where to save h5 files")
 if (data_dir == null) {
     println "cancel"
@@ -192,11 +178,13 @@ images.each() { image ->
         open_image_plus(HOST, USERNAME, PASSWORD, PORT, group_id, String.valueOf(id))
         //compressionLevel to be added if required
         args = "select=" + output_file
+        // Export as h5
         IJ.run("Export HDF5", args);
         imp = IJ.getImage()
         imp.close()
+        // Close export
     }
-    //Now open the h5 file  
+    // Import h5 
     args = "select=" + output_file + " datasetname=" + inputDataset +  " axisorder=" + axisOrder            
     println "opening h5 file"
     IJ.run("Import HDF5", args)
@@ -205,6 +193,7 @@ images.each() { image ->
     args = "projectfilename=" + pixelClassificationProject + " saveonly=false inputimage=" + input_image + " chosenoutputtype=" + outputType;
     println "running Pixel Classification Prediction"
     IJ.run("Run Pixel Classification Prediction", args);
+    // end pixel classification
 
     //Get the outputType.h5 file e.g. Probabilities.h5
     imp = IJ.getImage()
@@ -217,6 +206,7 @@ images.each() { image ->
     // Save the ROIs back to OMERO
     roivec = save_rois_to_omero(ctx, id, imp)
 
+    // Close windows
     IJ.run("Close")
     // Close the various components
     IJ.selectWindow("Results")
@@ -229,4 +219,5 @@ images.each() { image ->
 }
 // Close the connection
 gateway.disconnect()
+// End
 println "processing done"
