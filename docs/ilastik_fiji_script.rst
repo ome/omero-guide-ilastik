@@ -74,7 +74,7 @@ Open the images one-by-one using the Bio-Formats plugin:
     :start-after: // Open-image
     :end-before: // Check-exists
 
-Export each image as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
+Export each image as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand. The export is facilitated by the ilastik plugin for Fiji.
 
 .. literalinclude:: ../scripts/analyse_dataset_ilastik.groovy
     :start-after: // Export as h5
