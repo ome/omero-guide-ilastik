@@ -1,5 +1,5 @@
-**Use ilastik using Fiji scripting facility**
-=============================================
+Use ilastik using Fiji scripting facility and OMERO
+===================================================
 
 **Description**
 ---------------
@@ -45,7 +45,7 @@ See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 
 -  IDR data (idr0062) \ https://idr.openmicroscopy.org/webclient/?show=project-801
 
--  Script using Fiji \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy
+-  Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`
 
 **Step-by-step**
 ----------------
@@ -53,7 +53,7 @@ See \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
 Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Groovy Script run in Fiji, find the script on \ https://raw.githubusercontent.com/ome/training-scripts/master/practical/groovy/analyse_dataset_ilastik.groovy:
+For this example we will use the Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`:
 
 #. Open images (one by one) from an OMERO Dataset (hardcoded in the script) into Fiji and export them as h5 to a local folder specified interactively by the user during the run of the script. It is assumed that the folder specified by the user contains the ilastik Project prepared beforehand (see next step below). The export is facilitated by the ilastik plugin for Fiji.
 

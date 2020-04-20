@@ -1,5 +1,5 @@
-Getting started with ilastik and OMERO
-======================================
+Getting started with ilastik API and OMERO
+==========================================
 
 **Description**
 ---------------
@@ -22,7 +22,7 @@ We will show:
 **Resources**
 -------------
 
-We will use an ilastik project created with version 1.3.3 example pipeline to analyse 3D tissues
+We will use an ilastik project created with ilastik version 1.3.3 to analyse 3D tissues
 data from the Image Data Resource (IDR).
 
 - :download:`ilastik model <../notebooks/pipelines/pixel-class-133.ilp>`
@@ -57,16 +57,19 @@ Load the images:
     :end-before: # Create-dataset
 
 
-The ilastik project used expects the data array to be in the order TZYXC.
-The order will need to be adjusted depending on what is used in an ilastik project
-
-
 We are now ready to analyze the images:
 
 .. literalinclude:: ../scripts/pixels_classification.py
     :start-after: # Analyze-data
     :end-before: # Save-results
 
+
+The ilastik project used expects the data array to be in the order **TZYXC**.
+The order will need to be adjusted depending on the order expected in the ilastik project
+
+.. literalinclude:: ../scripts/pixels_classification.py
+    :start-after: # Load-data
+    :end-before: # Analyze-data
 
 Let's now save the generated data and create a new OMERO image:
 
