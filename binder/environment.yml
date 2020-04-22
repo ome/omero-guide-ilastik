@@ -10,3 +10,5 @@ dependencies:
   - ilastik-meta
   - ipywidgets
   - zarr
+  - s3fs
+  - dask
