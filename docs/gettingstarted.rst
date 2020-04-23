@@ -23,8 +23,7 @@ We will show:
 **Resources**
 -------------
 
-We will use an ilastik project created with ilastik version 1.3.3 to analyse 3D tissues
-data from the Image Data Resource (IDR).
+We will use an ilastik project created with ilastik version 1.3.3 to analyze 3D images of mouse blastocysts from the Image Data Resource (IDR).
 
 - :download:`ilastik model <../notebooks/pipelines/pixel-class-133.ilp>`
 - IDR data \ https://idr.openmicroscopy.org/webclient/?show=project-801
