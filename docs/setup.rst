@@ -23,7 +23,7 @@ Conda manages programming environments in a manner similar to
 
 - Create a programming environment using Conda::
 
-    $ conda create -n ilastik python=3.6
+    $ conda create -n ilastik python=3.7
 
 - Install ilastik, its dependencies and ``omero-py`` in order to connect to an OMERO server using an installation file::
 
