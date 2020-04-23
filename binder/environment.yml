@@ -12,3 +12,5 @@ dependencies:
   - zarr
   - s3fs
   - dask
+  - pip:
+    - itkwidgets==0.14.0
