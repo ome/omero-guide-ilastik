@@ -24,7 +24,7 @@ steps one and two described for the multi-z images above.
 **Step-by-step**
 ----------------
 
-#. Open ilastik, create a new Pixel classification project, feeding in the raw data in h5 form. The data come from \ https://www.ilastik.org/download.html\ , more concretely the "Mitocheck 2D+t" download \ http://data.ilastik.org/mitocheck.zip\ . Download, unzip and feed the h5 file which has not the "export" in its name into this step (Pixel classification).
+#. Open ilastik, create a new Pixel classification project, feeding in the raw data in h5 form. The data come from \ https://www.ilastik.org/download.html\ , more concretely the "Mitocheck 2D+t" download \ https://data.ilastik.org/mitocheck.zip\ . Download, unzip and feed the h5 file which has not the "export" in its name into this step (Pixel classification).
 
 #. Follow the steps of Pixel classification as described above in the idr0062 workflow - you will have to
 
