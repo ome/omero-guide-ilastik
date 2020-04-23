@@ -88,6 +88,30 @@ def load_numpy_array(image, path, extension=".tar", resolution=0):
                     return data[:]
     return None
 
+
+def load_from_s3(image, resolution='0'):
+    cache_size_mb = 2048
+    id = image.getId()
+    cfg = {
+        'anon': True,
+        'client_kwargs': {
+            'endpoint_url': 'https://minio-dev.openmicroscopy.org/',
+        },
+        'root': 'idr/outreach/%s.zarr' % id
+    }
+    s3 = s3fs.S3FileSystem(
+        anon=cfg['anon'],
+        client_kwargs=cfg['client_kwargs'],
+    )
+    store = s3fs.S3Map(root=cfg['root'], s3=s3, check=False)
+    cached_store = zarr.LRUStoreCache(store, max_size=(cache_size_mb * 2**20))
+    # data.shape is (t, c, z, y, x) by convention
+    data = da.from_zarr(cached_store)
+    values = data[:]
+    values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
+    return numpy.asarray(values)
+
+
 # Analyze-data
 def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
     # Prepare ilastik
