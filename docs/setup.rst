@@ -33,6 +33,10 @@ Conda manages programming environments in a manner similar to
 
     $ conda activate ilastik
 
+- Make sure that ``ilastik-meta`` can be executed::
+   
+    $ chmod -R +x PATH_TO_CONDA/envs/ilastik/ilastik-meta
+
 Alternatively you can create a local Docker Image using ``repo2docker``, see :download:`README.md <https://github.com/ome/omero-guide-ilastik/blob/master/README.md>`::
 
     $ repo2docker .
