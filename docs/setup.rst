@@ -10,6 +10,12 @@ We will use the ilastik API to analyze data stored in an OMERO server.
 We recommend to install the dependencies using Conda.
 Conda manages programming environments in a manner similar to 
 `virtualenv <https://virtualenv.pypa.io/en/stable/>`_.
+You can install the various dependencies following the steps below (Option 1) or build locally a Docker Image
+using ``repo2docker`` (Option 2). When the installation is done, you should be ready to use the ilastik API and OMERO, see :doc:`gettingstarted`.
+:
+
+*Option 1*
+~~~~~~~~~~
 
 - Install `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ if necessary.
 
@@ -23,7 +29,7 @@ Conda manages programming environments in a manner similar to
 
 - Create a programming environment using Conda::
 
-    $ conda create -n ilastik python=3.6
+    $ conda create -n ilastik python=3.7
 
 - Install ilastik, its dependencies and ``omero-py`` in order to connect to an OMERO server using an installation file::
 
@@ -32,6 +38,13 @@ Conda manages programming environments in a manner similar to
 - Activate the environment::
 
     $ conda activate ilastik
+
+- Make sure that ``ilastik-meta`` can be executed::
+   
+    $ chmod -R +x PATH_TO_CONDA/envs/ilastik/ilastik-meta
+
+*Option 2*
+~~~~~~~~~~
 
 Alternatively you can create a local Docker Image using ``repo2docker``, see :download:`README.md <https://github.com/ome/omero-guide-ilastik/blob/master/README.md>`::
 
@@ -58,4 +71,3 @@ When the Image is ready:
 - The environment with ilastik and the OMERO Python bindings is named ``notebook``, activate it::
 
     $ conda activate notebook
-

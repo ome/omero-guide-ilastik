@@ -7,5 +7,8 @@ Contents:
 
 .. toctree::
    setup
-   ilastik
+   gettingstarted
+   ilastik_fiji
+   ilastik_fiji_script
+   ilastik_tracking
    :maxdepth: 1
