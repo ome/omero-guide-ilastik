@@ -167,6 +167,7 @@ def main():
         dataset_id = input("Dataset ID [6210]: ") or '6210'
         # Connect to the server
         conn = connect(host, username, password)
+        conn.c.enableKeepAlive(60)
 
         # path to the ilastik project
         ilastik_project = "../notebooks/pipelines/pixel-class-133.ilp"
