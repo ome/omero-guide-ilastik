@@ -186,24 +186,26 @@ def disconnect(conn):
 # main
 def main():
     # Collect user credentials
-    host = input("Host [wss://workshop.openmicroscopy.org/omero-ws]: ") or 'wss://workshop.openmicroscopy.org/omero-ws'  # noqa
-    username = input("Username [trainer-1]: ") or 'trainer-1'
-    password = getpass("Password: ")
-    dataset_id = input("Dataset ID [6210]: ") or '6210'
-    # Connect to the server
-    conn = connect(host, username, password)
+    try:
+        host = input("Host [wss://workshop.openmicroscopy.org/omero-ws]: ") or 'wss://workshop.openmicroscopy.org/omero-ws'  # noqa
+        username = input("Username [trainer-1]: ") or 'trainer-1'
+        password = getpass("Password: ")
+        dataset_id = input("Dataset ID [6210]: ") or '6210'
+        # Connect to the server
+        conn = connect(host, username, password)
     
-    # path to the ilastik project
-    ilastik_project = "../notebooks/pipelines/pixel-class-133.ilp"
+        # path to the ilastik project
+        ilastik_project = "../notebooks/pipelines/pixel-class-133.ilp"
 
-    # Load the images in the dataset
-    images = load_images(conn, dataset_id)
+        # Load the images in the dataset
+        images = load_images(conn, dataset_id)
 
-    new_dataset = create_dataset(conn, dataset_id)
+        new_dataset = create_dataset(conn, dataset_id)
 
-    analyze(conn, images, ilastik_project, new_dataset)
+        analyze(conn, images, ilastik_project, new_dataset)
+    finally:
+        disconnect(conn)
 
-    disconnect(conn)
     print("done")
 
 
