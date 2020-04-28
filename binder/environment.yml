@@ -9,3 +9,8 @@ dependencies:
   - ilastik-dependencies-no-solvers
   - ilastik-meta
   - ipywidgets
+  - zarr  # for scripts reading from S3
+  - s3fs  # for scripts reading from S3
+  - dask  # for scripts reading from S3
+  - pip:
+    - itkwidgets==0.14.0
