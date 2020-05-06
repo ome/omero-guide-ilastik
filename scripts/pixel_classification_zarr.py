@@ -93,8 +93,8 @@ def load_numpy_array(image, path, extension=".tar", resolution=0):
 
 def load_from_s3(image, resolution='0'):
     id = image.getId()
-    endpoint_url = 'https://s3.embassy.ebi.ac.uk/'
-    root = 'idr/zarr/v0.1/%s.zarr/%s/' % (id, resolution)
+    endpoint_url = 'https://minio-dev.openmicroscopy.org/'
+    root = 'idr/outreach/%s.zarr/' % id
     # data.shape is (t, c, z, y, x) by convention
     data = da.from_zarr(endpoint_url + root)
     values = data[:]
@@ -159,10 +159,10 @@ def disconnect(conn):
 def main():
     # Collect user credentials
     try:
-        host = input("Host [wss://workshop.openmicroscopy.org/omero-ws]: ") or 'wss://workshop.openmicroscopy.org/omero-ws'  # noqa
+        host = input("Host [wss://outreach.openmicroscopy.org/omero-ws]: ") or 'wss://outreach.openmicroscopy.org/omero-ws'  # noqa
         username = input("Username [trainer-1]: ") or 'trainer-1'
         password = getpass("Password: ")
-        dataset_id = input("Dataset ID [6210]: ") or '6210'
+        dataset_id = input("Dataset ID [6161]: ") or '6161'
         # Connect to the server
         conn = connect(host, username, password)
         conn.c.enableKeepAlive(60)
