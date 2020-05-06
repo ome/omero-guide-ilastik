@@ -27,6 +27,7 @@ import tarfile
 import numpy
 import os
 import zarr
+import dask.array as da
 
 import omero.clients
 from omero.gateway import BlitzGateway
@@ -67,7 +68,7 @@ def load_numpy_array(image, path, extension=".tar", resolution=0):
         if isinstance(ann, omero.gateway.FileAnnotationWrapper):
             name = ann.getFile().getName()
             ns = ann.getNs()
-            if (name.endswith(".zip") or  name.endswith(".tar")) and ns is None:
+            if (name.endswith(".zip") or name.endswith(".tar")) and ns is None:
                 file_path = os.path.join(path, name)
                 f_path = os.path.join(path, name.strip(extension))
                 with open(str(file_path), 'wb') as f:
@@ -80,8 +81,9 @@ def load_numpy_array(image, path, extension=".tar", resolution=0):
                     tf.close()
                     data = zarr.open(f_path)
                     values = data[resolution][:]
-                    #from tczyx to tzyxc
-                    values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
+                    # from tczyx to tzyxc
+                    values = values.swapaxes(1, 2).swapaxes(2, 3)
+                    values = values.swapaxes(3, 4)
                     return values
                 else:
                     data = zarr.open(file_path)
@@ -90,23 +92,11 @@ def load_numpy_array(image, path, extension=".tar", resolution=0):
 
 
 def load_from_s3(image, resolution='0'):
-    cache_size_mb = 2048
     id = image.getId()
-    cfg = {
-        'anon': True,
-        'client_kwargs': {
-            'endpoint_url': 'https://minio-dev.openmicroscopy.org/',
-        },
-        'root': 'idr/outreach/%s.zarr' % id
-    }
-    s3 = s3fs.S3FileSystem(
-        anon=cfg['anon'],
-        client_kwargs=cfg['client_kwargs'],
-    )
-    store = s3fs.S3Map(root=cfg['root'], s3=s3, check=False)
-    cached_store = zarr.LRUStoreCache(store, max_size=(cache_size_mb * 2**20))
+    endpoint_url = 'https://s3.embassy.ebi.ac.uk/'
+    root = 'idr/zarr/v0.1/%s.zarr/%s/' % (id, resolution)
     # data.shape is (t, c, z, y, x) by convention
-    data = da.from_zarr(cached_store)
+    data = da.from_zarr(endpoint_url + root)
     values = data[:]
     values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
     return numpy.asarray(values)
@@ -119,7 +109,7 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
     path = tempfile.mkdtemp()
     if not os.path.exists(path):
         os.makedirs(path)
-    
+
     os.environ["LAZYFLOW_THREADS"] = "2"
     os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
     args = ilastik_main.parse_args([])
@@ -151,31 +141,13 @@ def save_results(conn, image, data, dataset, path):
     # Re-organise array from tzyxc to zctyx order expected by OMERO
     # data = data.swapaxes(0, 1).swapaxes(3, 4).swapaxes(2, 3).swapaxes(1, 2)
     namespace = "ilastik.zarr.demo"
-    file_path = os.path.join(path, name)
-    with zarr.ZipStore(file_path, mode='w') as store:
-            zarr.array(data, store=store, dtype='int16', compressor=zarr.Blosc(cname='zstd'))
-    ann = conn.createFileAnnfromLocalFile(file_path, mimetype="application/zip", ns=namespace, desc=desc)
+    fp = os.path.join(path, name)
+    with zarr.ZipStore(fp, mode='w') as store:
+        zarr.array(data, store=store, dtype='int16',
+                   compressor=zarr.Blosc(cname='zstd'))
+    ann = conn.createFileAnnfromLocalFile(fp, mimetype="application/zip",
+                                          ns=namespace, desc=desc)
     image.linkAnnotation(ann)
-
-    # Re-organise array from tzyxc to zctyx order expected by OMERO
-    data = data.swapaxes(0, 1).swapaxes(3, 4).swapaxes(2, 3).swapaxes(1, 2)
-
-    def plane_gen():
-        """
-        Set up a generator of 2D numpy arrays.
-        The createImage method below expects planes in the order specified here
-        (for z.. for c.. for t..)
-        """
-        size_z = data.shape[0]-1
-        for z in range(data.shape[0]):  # all Z sections data.shape[0]
-            print('z: %s/%s' % (z, size_z))
-            for c in range(data.shape[1]):  # all channels
-                for t in range(data.shape[2]):  # all time-points
-                    yield data[z][c][t]
-
-    conn.createImageFromNumpySeq(plane_gen(), name, data.shape[0],
-                                 data.shape[1], data.shape[2],
-                                 description=desc, dataset=dataset)
 
 
 # Disconnect
@@ -194,7 +166,7 @@ def main():
         # Connect to the server
         conn = connect(host, username, password)
         conn.c.enableKeepAlive(60)
-    
+
         # path to the ilastik project
         ilastik_project = "../notebooks/pipelines/pixel-class-133.ilp"
 
