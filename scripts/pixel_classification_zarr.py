@@ -117,7 +117,7 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
     args.project = model
     shell = ilastik_main.main(args)
     for image in images:
-        input_data = load_numpy_array(image, path)
+        input_data = load_from_s3(image, path)
         # run ilastik headless
         print('running ilastik using %s and %s' % (model, image.getName()))
         data = OrderedDict([
