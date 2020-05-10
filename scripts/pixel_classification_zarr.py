@@ -128,12 +128,10 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
                 "Raw Data",
                 [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
             )])
-        predictions = shell.workflow.batchProcessingApplet.run_export(data,
-                                                                      export_to_array=True)  # noqa
-        #for d in predictions:
-        #    save_results(conn, image, d, new_dataset, path)
+        shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
     elapsed = time.time() - start
     print(elapsed)
+
 
 # Save-results
 def save_results(conn, image, data, dataset, path):
