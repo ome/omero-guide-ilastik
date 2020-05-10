@@ -29,6 +29,7 @@ import os
 import zarr
 import dask
 import dask.array as da
+from dask.distributed import Client, LocalCluster
 
 import omero.clients
 from omero.gateway import BlitzGateway
@@ -38,6 +39,7 @@ from collections import OrderedDict
 import ilastik_main
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
+import time
 
 # Connect to the server
 def connect(hostname, username, password):
@@ -54,10 +56,9 @@ def load_images(conn, dataset_id):
 
 
 # Load-data
-def load_from_s3(image, resolution='0'):
-    id = image.getId()
+def load_from_s3(image_id, resolution='0'):
     endpoint_url = 'https://minio-dev.openmicroscopy.org/'
-    root = 'idr/outreach/%s.zarr/' % id
+    root = 'idr/outreach/%s.zarr/' % image_id
     # data.shape is (t, c, z, y, x) by convention
     data = da.from_zarr(endpoint_url + root)
     values = data[:]
@@ -66,13 +67,13 @@ def load_from_s3(image, resolution='0'):
 
 
 # Analyze-data
-def analyze(image, model):
+def analyze(image_id, model):
     args = ilastik_main.parse_args([])
     args.headless = True
     args.project = model
     args.readonly = True
     shell = ilastik_main.main(args)
-    input_data = load_from_s3(image)
+    input_data = load_from_s3(image_id)
     # run ilastik headless
     data = OrderedDict([
         (
@@ -107,15 +108,17 @@ def main():
         os.environ["LAZYFLOW_THREADS"] = "2"
         os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
  
-        import time
+        cluster = LocalCluster()
+        client = Client(cluster)
 
-        lazy_results = []
+
+        futures = []
         for image in images:
-            lazy_result = dask.delayed(analyze)(image, ilastik_project)
-            lazy_results.append(lazy_result)
+            future = client.submit(analyze, image.getId(), ilastik_project)
+            futures.append(future)
         
         start = time.time()
-        results = dask.compute(*lazy_results)
+        results = client.gather(futures)
         done = time.time()
         elapsed = done - start
         print(elapsed)
