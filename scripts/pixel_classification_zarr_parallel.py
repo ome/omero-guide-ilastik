@@ -22,16 +22,12 @@
 # Version: 1.0
 #
 
-import tempfile
-import tarfile
 import numpy
 import os
-import zarr
-import dask
 import dask.array as da
+from dask.diagnostics import ProgressBar
 from dask.distributed import Client, LocalCluster
 
-import omero.clients
 from omero.gateway import BlitzGateway
 from getpass import getpass
 from collections import OrderedDict
@@ -40,6 +36,7 @@ import ilastik_main
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
 import time
+
 
 # Connect to the server
 def connect(hostname, username, password):
@@ -55,15 +52,17 @@ def load_images(conn, dataset_id):
     return conn.getObjects('Image', opts={'dataset': dataset_id})
 
 
-# Load-data
+# Load-binary
 def load_from_s3(image_id, resolution='0'):
     endpoint_url = 'https://minio-dev.openmicroscopy.org/'
     root = 'idr/outreach/%s.zarr/' % image_id
     # data.shape is (t, c, z, y, x) by convention
-    data = da.from_zarr(endpoint_url + root)
-    values = data[:]
-    values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
-    return numpy.asarray(values)
+    with ProgressBar():
+        data = da.from_zarr(endpoint_url + root)
+        values = data[:]
+        # re-order tczyx -> tzyxc as expected by the ilastik project
+        values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
+        return numpy.asarray(values)
 
 
 # Analyze-data
@@ -81,6 +80,21 @@ def analyze(image_id, model):
             [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
         )])
     return shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
+
+
+# Prepare-call
+def prepare(client, images, ilastik_project):
+    futures = []
+    for image in images:
+        future = client.submit(analyze, image.getId(), ilastik_project)
+        futures.append(future)
+    return futures
+
+
+# Gather
+def gather_results(client, futures):
+    return client.gather(futures)
+
 
 # Disconnect
 def disconnect(conn):
@@ -103,22 +117,20 @@ def main():
 
         # Load the images in the dataset
         images = load_images(conn, dataset_id)
-        
+
         # prepare ilastik
         os.environ["LAZYFLOW_THREADS"] = "2"
         os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
- 
+
+        # Create-client
         cluster = LocalCluster()
         client = Client(cluster)
+        # End-client
 
+        futures = prepare(client, images, ilastik_project)
 
-        futures = []
-        for image in images:
-            future = client.submit(analyze, image.getId(), ilastik_project)
-            futures.append(future)
-        
         start = time.time()
-        results = client.gather(futures)
+        gather_results(client, futures)
         done = time.time()
         elapsed = done - start
         print(elapsed)
