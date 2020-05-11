@@ -83,11 +83,8 @@ def analyze(image_id, model):
 
 
 # Prepare-call
-def prepare(client, images, ilastik_project):
-    futures = []
-    for image in images:
-        future = client.submit(analyze, image.getId(), ilastik_project)
-        futures.append(future)
+def prepare(client, images, model):
+    futures = [client.submit(analyze, i.getId(), model) for i in images]
     return futures
 
 
