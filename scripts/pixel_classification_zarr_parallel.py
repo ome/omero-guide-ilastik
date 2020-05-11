@@ -27,6 +27,7 @@ import os
 import dask.array as da
 from dask.diagnostics import ProgressBar
 from dask.distributed import Client, LocalCluster
+import matplotlib.pyplot as plt
 
 from omero.gateway import BlitzGateway
 from getpass import getpass
@@ -98,6 +99,16 @@ def disconnect(conn):
     conn.close()
 
 
+# Save results
+def save_results(results):
+    for i, r in enumerate(results):
+        for d in r:
+            # Re-organise array from tzyxc to zctyx order expected by OMERO
+            d = d.swapaxes(0, 1).swapaxes(3, 4).swapaxes(2, 3).swapaxes(1, 2)
+            value = "image_%s.png" % i
+            plt.imsave(value, d[0, 0, 0, :, :])
+
+
 # main
 def main():
     # Collect user credentials
@@ -127,10 +138,11 @@ def main():
         futures = prepare(client, images, ilastik_project)
 
         start = time.time()
-        gather_results(client, futures)
+        results = gather_results(client, futures)
         done = time.time()
-        elapsed = done - start
-        print(elapsed)
+        elapsed = (done - start) // 60
+        print("Compute time (in minutes): %s" % elapsed)
+        save_results(results)
     finally:
         disconnect(conn)
 
