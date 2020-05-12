@@ -8,6 +8,7 @@ Contents:
 .. toctree::
    setup
    gettingstarted
+   ilastik_parallel
    ilastik_fiji
    ilastik_fiji_script
    ilastik_tracking

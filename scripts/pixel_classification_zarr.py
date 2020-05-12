@@ -115,7 +115,10 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
     args = ilastik_main.parse_args([])
     args.headless = True
     args.project = model
+    args.readonly = True
     shell = ilastik_main.main(args)
+    import time
+    start = time.time()
     for image in images:
         input_data = load_from_s3(image, path)
         # run ilastik headless
@@ -125,10 +128,9 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
                 "Raw Data",
                 [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
             )])
-        predictions = shell.workflow.batchProcessingApplet.run_export(data,
-                                                                      export_to_array=True)  # noqa
-        for d in predictions:
-            save_results(conn, image, d, new_dataset, path)
+        shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
+    elapsed = time.time() - start
+    print(elapsed)
 
 
 # Save-results
