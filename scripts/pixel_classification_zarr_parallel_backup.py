@@ -22,21 +22,21 @@
 # Version: 1.0
 #
 
+import tempfile
+import tarfile
 import numpy
 import os
+import zarr
+import dask
 import dask.array as da
-from dask.diagnostics import ProgressBar
-from dask.distributed import Client, LocalCluster
-import matplotlib.pyplot as plt
 
+import omero.clients
 from omero.gateway import BlitzGateway
 from getpass import getpass
 from collections import OrderedDict
 
-from ilastik import app
+import ilastik_main
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
-
-import time
 
 
 # Connect to the server
@@ -53,27 +53,26 @@ def load_images(conn, dataset_id):
     return conn.getObjects('Image', opts={'dataset': dataset_id})
 
 
-# Load-binary
-def load_from_s3(image_id, resolution='0'):
+# Load-data
+def load_from_s3(image, resolution='0'):
+    id = image.getId()
     endpoint_url = 'https://minio-dev.openmicroscopy.org/'
-    root = 'idr/outreach/%s.zarr/' % image_id
+    root = 'idr/outreach/%s.zarr/' % id
     # data.shape is (t, c, z, y, x) by convention
-    with ProgressBar():
-        data = da.from_zarr(endpoint_url + root)
-        values = data[:]
-        # re-order tczyx -> tzyxc as expected by the ilastik project
-        values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
-        return numpy.asarray(values)
+    data = da.from_zarr(endpoint_url + root)
+    values = data[:]
+    values = values.swapaxes(1, 2).swapaxes(2, 3).swapaxes(3, 4)
+    return numpy.asarray(values)
 
 
 # Analyze-data
-def analyze(image_id, model):
-    args = app.parse_args([])
+def analyze(image, model):
+    args = ilastik_main.parse_args([])
     args.headless = True
     args.project = model
     args.readonly = True
-    shell = app.main(args)
-    input_data = load_from_s3(image_id)
+    shell = ilastik_main.main(args)
+    input_data = load_from_s3(image)
     # run ilastik headless
     data = OrderedDict([
         (
@@ -82,31 +81,9 @@ def analyze(image_id, model):
         )])
     return shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
 
-
-# Prepare-call
-def prepare(client, images, model):
-    futures = [client.submit(analyze, i.getId(), model) for i in images]
-    return futures
-
-
-# Gather
-def gather_results(client, futures):
-    return client.gather(futures)
-
-
 # Disconnect
 def disconnect(conn):
     conn.close()
-
-
-# Save results
-def save_results(results):
-    for i, r in enumerate(results):
-        for d in r:
-            # Re-organise array from tzyxc to zctyx order expected by OMERO
-            d = d.swapaxes(0, 1).swapaxes(3, 4).swapaxes(2, 3).swapaxes(1, 2)
-            value = "image_%s.png" % i
-            plt.imsave(value, d[0, 0, 0, :, :])
 
 
 # main
@@ -125,24 +102,23 @@ def main():
 
         # Load the images in the dataset
         images = load_images(conn, dataset_id)
-
+        
         # prepare ilastik
         os.environ["LAZYFLOW_THREADS"] = "2"
         os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
+ 
+        import time
 
-        # Create-client
-        cluster = LocalCluster()
-        client = Client(cluster)
-        # End-client
-
-        futures = prepare(client, images, ilastik_project)
-
+        lazy_results = []
+        for image in images:
+            lazy_result = dask.delayed(analyze)(image, ilastik_project)
+            lazy_results.append(lazy_result)
+        
         start = time.time()
-        results = gather_results(client, futures)
+        results = dask.compute(*lazy_results)
         done = time.time()
-        elapsed = (done - start) // 60
-        print("Compute time (in minutes): %s" % elapsed)
-        save_results(results)
+        elapsed = done - start
+        print(elapsed)
     finally:
         disconnect(conn)
 

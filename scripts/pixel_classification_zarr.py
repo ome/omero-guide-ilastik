@@ -22,6 +22,7 @@
 # Version: 1.0
 #
 
+import time
 import tempfile
 import tarfile
 import numpy
@@ -34,7 +35,7 @@ from omero.gateway import BlitzGateway
 from getpass import getpass
 from collections import OrderedDict
 
-import ilastik_main
+from ilastik import app
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
 
@@ -112,12 +113,12 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
 
     os.environ["LAZYFLOW_THREADS"] = "2"
     os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
-    args = ilastik_main.parse_args([])
+    args = app.parse_args([])
     args.headless = True
     args.project = model
     args.readonly = True
-    shell = ilastik_main.main(args)
-    import time
+    shell = app.main(args)
+
     start = time.time()
     for image in images:
         input_data = load_from_s3(image, path)

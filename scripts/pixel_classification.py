@@ -30,7 +30,7 @@ from omero.gateway import BlitzGateway
 from getpass import getpass
 from collections import OrderedDict
 
-import ilastik_main
+from ilastik import app
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
 
@@ -105,10 +105,10 @@ def analyze(conn, images, model, new_dataset):
     # Prepare ilastik
     os.environ["LAZYFLOW_THREADS"] = "2"
     os.environ["LAZYFLOW_TOTAL_RAM_MB"] = "2000"
-    args = ilastik_main.parse_args([])
+    args = app.parse_args([])
     args.headless = True
     args.project = model
-    shell = ilastik_main.main(args)
+    shell = app.main(args)
     for image in images:
         input_data = load_numpy_array(image)
         # run ilastik headless
