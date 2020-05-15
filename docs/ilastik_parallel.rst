@@ -6,7 +6,7 @@ Run ilastik in parallel using dask
 ---------------
 
 We will show how to use `dask <https://dask.org/>`_ to analyze images in parallel
-using ilastik. Binary data are stored in a public S3 repository in the Zarr format.
+using the ilastik API. Binary data are stored in a public S3 repository in the Zarr format.
 
 
 **Setup**
@@ -35,13 +35,11 @@ Load the images:
     :start-after: # Load-images
     :end-before: # Load-binary
 
-
 Define the analysis function:
 
 .. literalinclude:: ../scripts/pixel_classification_zarr_parallel.py
     :start-after: # Analyze-data
     :end-before: # Prepare-call
-
 
 Helper function load the binary as a numpy array from the Zarr storage format:
 
@@ -67,7 +65,6 @@ We wait until this work is done and gather the results to our local process:
 .. literalinclude:: ../scripts/pixel_classification_zarr_parallel.py
     :start-after: # Gather
     :end-before: # Disconnect
-
 
 When done, close the session:
 
