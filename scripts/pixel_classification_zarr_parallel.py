@@ -33,7 +33,7 @@ from omero.gateway import BlitzGateway
 from getpass import getpass
 from collections import OrderedDict
 
-import ilastik_main
+from ilastik import app
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
 import time
@@ -68,11 +68,11 @@ def load_from_s3(image_id, resolution='0'):
 
 # Analyze-data
 def analyze(image_id, model):
-    args = ilastik_main.parse_args([])
+    args = app.parse_args([])
     args.headless = True
     args.project = model
     args.readonly = True
-    shell = ilastik_main.main(args)
+    shell = app.main(args)
     input_data = load_from_s3(image_id)
     # run ilastik headless
     data = OrderedDict([

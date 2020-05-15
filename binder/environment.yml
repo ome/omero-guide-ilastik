@@ -7,7 +7,7 @@ dependencies:
   - omero-py
   - pip
   - ilastik-dependencies-no-solvers
-  - ilastik-meta
+  - ilastik-meta==1.4.0b5
   - ipywidgets
   - zarr  # for scripts reading from S3
   - s3fs  # for scripts reading from S3
