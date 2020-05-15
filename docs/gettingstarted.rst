@@ -18,7 +18,7 @@ We will show:
 
 - How to run ilastik using its Python API.
 
-- How to save the generated results as OMERO images. If you are using a public server e.g. idr.openmicroscopy.org, this step will not work.
+- How to save the generated results as OMERO images. If you are accessing a public resource e.g. idr.openmicroscopy.org, this step will not work.
 
 **Setup**
 ---------
