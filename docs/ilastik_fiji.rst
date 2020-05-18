@@ -4,7 +4,7 @@ Use ilastik as a Fiji plugin and OMERO
 **Description**
 ---------------
 
-In this section, we will show how to use ilastik user interface to
+In this section, we will show how to use the ilastik user interface to
 perform segmentations on multi-z images stored in OMERO. The connection
 between OMERO and ilastik is facilitated via Fiji, for which both OMERO
 and ilastik have plugins. The segmentation steps in this part are

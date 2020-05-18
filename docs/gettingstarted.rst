@@ -18,7 +18,7 @@ We will show:
 
 - How to run ilastik using its Python API.
 
-- How to save the generated results as OMERO images.
+- How to save the generated results as OMERO images. If you are accessing a public resource e.g. idr.openmicroscopy.org, this step will not work.
 
 **Setup**
 ---------
@@ -34,7 +34,7 @@ We will use an ilastik project created with ilastik version 1.3.3 to analyze 3D 
 - IDR data \ https://idr.openmicroscopy.org/webclient/?show=project-801
 
 For convenience, the IDR data have been imported into the training
-OMERO.server. This is only because we cannot save results back to IDR
+OMERO.server. This is **only** because we **cannot** save results back to IDR
 which is a read-only OMERO.server.
 
 **Step-by-Step**
