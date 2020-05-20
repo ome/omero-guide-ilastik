@@ -3,14 +3,12 @@ channels:
   - ome
   - ilastik-forge
 dependencies:
-  - zeroc-ice36-python
   - omero-py
   - pip
   - ilastik-dependencies-no-solvers
   - ilastik-meta==1.4.0b5
   - ipywidgets
   - zarr  # for scripts reading from S3
-  - s3fs  # for scripts reading from S3
   - dask  # for scripts reading from S3
   - pip:
     - itkwidgets==0.14.0
