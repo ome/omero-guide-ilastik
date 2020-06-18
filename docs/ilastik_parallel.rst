@@ -2,21 +2,21 @@ Run ilastik in parallel using dask
 ==================================
 
 
-**Description**
----------------
+Description
+-----------
 
 We will show how to use `dask <https://dask.org/>`_ to analyze images in parallel
 using the ilastik API. Binary data are stored in a public S3 repository in the Zarr format.
 
 
-**Setup**
----------
+Setup
+-----
 
 We recommend to use a Conda environment to install ilastik and the OMERO Python bindings. Please read first :doc:`setup`.
 
 
-**Step-by-Step**
-----------------
+Step-by-Step
+------------
 
 In this section, we go through the steps required to analyze the data.
 The script used in this document is :download:`pixel_classification_zarr_parallel.py <../scripts/pixel_classification_zarr_parallel.py>`.
@@ -70,4 +70,11 @@ When done, close the session:
 
 .. literalinclude:: ../scripts/pixel_classification_zarr_parallel.py
     :start-after: # Disconnect
-    :end-before: # main
+    :end-before: # Save results
+
+In order the use the methods implemented above in a proper standalone script:
+**Wrap it all up** in ``main``:
+
+.. literalinclude:: ../scripts/pixel_classification_zarr_parallel.py
+    :start-after: # main
+

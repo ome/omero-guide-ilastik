@@ -1,8 +1,8 @@
 Use ilastik using Fiji scripting facility and OMERO
 ===================================================
 
-**Description**
----------------
+Description
+-----------
 
 In this section, the segmentation (using Pixel classification routine
 of ilastik) of the multi-z images is run in a batch mode.
@@ -17,10 +17,11 @@ classify objects on images from OMERO manually.
 
 We will show:
 
--  How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
+- How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, 
+- How to save the ROIs on the original images in OMERO.
 
-**Setup**
----------
+Setup
+-----
 
 **ilastik installation**
 
@@ -28,7 +29,7 @@ We will show:
 
 **ilastik plugin for Fiji installation instructions**
 
-- Start Fiji. Update it (Help > Update ImageJ)
+- Start Fiji. Update it (``Help > Update ImageJ``).
 - in the ``Manage Update Sites`` check the checkbox next to the "ilastik" site.
 - After the update was successful, restart your Fiji.
 - The new ilastik menu item should be under Plugins menu.
@@ -38,23 +39,23 @@ not necessarily alphabetically ordered.
 
 **OMERO plugin for Fiji installation instructions**
 
-- For installation instructions, go to \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
+- For installation instructions, go to `Fiji installation <https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html>`_.
 
-**Resources**
--------------
+Resources
+---------
 
--  IDR data (idr0062) \ https://idr.openmicroscopy.org/webclient/?show=project-801
+-  Images from IDR `idr0062 <https://idr.openmicroscopy.org/webclient/?show=project-801>`_.
 
 -  Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`
 
-**Step-by-step**
-----------------
+Step-by-step
+------------
 
 Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For this example we will use the Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`.
-The script uses the OMERO Java API.
+The script uses the OMERO `JAVA API <https://docs.openmicroscopy.org/latest/omero/developers/Java.html>`_.
 
 Connect to the server:
 
