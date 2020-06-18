@@ -1,7 +1,7 @@
 # Guide on how to integrate ilastik and OMERO
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ome/omero-guide-ilastik/master?filepath=notebooks)
 
-[![Documentation Status](https://readthedocs.org/projects/omero-guide-ilastik/badge/?version=latest)](https://omero-guides.readthedocs.io/en/latest/upload/docs/import.html)
+[![Documentation Status](https://readthedocs.org/projects/omero-guide-ilastik/badge/?version=latest)](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html)
 
 The documentation is deployed at [Use Ilastik](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html)
 
