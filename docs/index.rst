@@ -14,3 +14,8 @@ Contents:
    ilastik_fiji_script
    ilastik_tracking
    :maxdepth: 1
+
+Contribute
+----------
+
+Changes to the documentation or the materials should be made directly in the `omero-guide-ilastik repository <https://github.com/ome/omero-guide-ilastik>`_.
