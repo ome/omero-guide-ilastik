@@ -3,7 +3,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/omero-guide-ilastik/badge/?version=latest)](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html)
 
-The documentation is deployed at [Use Ilastik](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html)
+The documentation is deployed at [Use Ilastik](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html).
 
 This guide demonstrates how to use ilastik to analyze data stored in [IDR](https://idr.openmicroscopy.org/) or an OMERO server.
 
