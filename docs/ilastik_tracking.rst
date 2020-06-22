@@ -2,8 +2,8 @@ Track mitosis using ilastik
 ===========================
 
 
-**Description**
----------------
+Description
+-----------
 
 In this section, a manual tracking workflow is shown on images of
 cells undergoing mitosis. The lineage of the cells is being followed.
@@ -13,16 +13,16 @@ for further use by the follow-up scripting workflow, similarly to the
 steps one and two described for the multi-z images above.
 
 
-**Setup**
----------
+Setup
+-----
 
 **ilastik installation**
 
 - ilastik has been installed on the local machine. See \ https://www.ilastik.org/\  for details.
 
 
-**Step-by-step**
-----------------
+Step-by-step
+------------
 
 #. Open ilastik, create a new Pixel classification project, feeding in the raw data in h5 form. The data come from \ https://www.ilastik.org/download.html\ , more concretely the "Mitocheck 2D+t" download \ https://data.ilastik.org/mitocheck.zip\ . Download, unzip and feed the h5 file which has not the "export" in its name into this step (Pixel classification).
 

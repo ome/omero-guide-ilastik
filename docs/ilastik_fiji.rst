@@ -1,8 +1,8 @@
 Use ilastik as a Fiji plugin and OMERO
 ======================================
 
-**Description**
----------------
+Description
+-----------
 
 In this section, we will show how to use the ilastik user interface to
 perform segmentations on multi-z images stored in OMERO. The connection
@@ -13,19 +13,19 @@ project). The ``ilp`` file is used later for the scripting workflow.
 
 We will show:
 
--  How to manually open images from OMERO in ilastik using the Fiji plugin for OMERO and Fiji plugin for ilastik
+-  How to manually open images from OMERO in ilastik using the Fiji plugin for OMERO and Fiji plugin for ilastik.
 
--  How to segment the multi-z images in ilastik and produce an ilastik Project (``ilp`` file) recording the steps
+-  How to segment the multi-z images in ilastik and produce an ilastik Project (``ilp`` file) recording the steps.
 
--  How to save the results of the segmentation (ROIs and Probability maps) in OMERO, using the manual workflow and Fiji
+-  How to save the results of the segmentation (ROIs and Probability maps) in OMERO, using the manual workflow and Fiji.
 
--  How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO
+-  How to run a script in Fiji, consuming the ``ilp`` file and running the segmentation of the images coming from an OMERO Dataset, saving the ROIs on the original images in OMERO.
 
--  How to manually classify images
+-  How to manually classify images.
 
 
-**Setup**
----------
+Setup
+-----
 
 **ilastik installation**
 
@@ -33,8 +33,8 @@ We will show:
 
 **ilastik plugin for Fiji installation instructions**
 
-- Start Fiji. Update it (Help > Update ImageJ)
-- in the ``Manage Update Sites`` check the checkbox next to the "ilastik" site.
+- Start Fiji. Update it (``Help > Update ImageJ``).
+- In the ``Manage Update Sites`` check the checkbox next to the "ilastik" site.
 - After the update was successful, restart your Fiji.
 - The new ilastik menu item should be under Plugins menu.
 
@@ -43,15 +43,15 @@ not necessarily alphabetically ordered.
 
 **OMERO plugin for Fiji installation instructions**
 
-- For installation instructions, go to \ https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html
+- For installation instructions, go to `Fiji installation <https://omero-guides.readthedocs.io/en/latest/fiji/docs/installation.html>`_.
 
-**Resources**
--------------
+Resources
+---------
 
--  IDR data (idr0062) \ https://idr.openmicroscopy.org/webclient/?show=project-801
+-  Images from IDR `idr0062 <https://idr.openmicroscopy.org/webclient/?show=project-801>`_.
 
-**Step-by-step**
-----------------
+Step-by-step
+------------
 
 Manual training of z-stack segmentation in ilastik
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -64,7 +64,7 @@ Manual training of z-stack segmentation in ilastik
 
 #.  Select a local directory to export to and save the image locally as an ``.h5`` file.
 
-#.  Repeat this step with several images from the Blastocysts Dataset of idr0062.
+#.  Repeat this step with several images from the `Blastocysts Dataset <https://idr.openmicroscopy.org/webclient/?show=dataset-7754>`_ of idr0062.
 
 #.  Start ilastik.
 
@@ -269,4 +269,3 @@ Manual workflow of Object classification on z-stacks in ilastik
 .. |image14a| image:: images/ilastik16.png
    :width: 5.04167in
    :height: 0.32292in
-

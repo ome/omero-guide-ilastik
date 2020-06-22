@@ -4,8 +4,8 @@ Install ilastik and OMERO Python bindings
 In this section, we show how to install ilastik in a `Conda <https://conda.io/en/latest/>`_ environment.
 We will use the ilastik API to analyze data stored in an OMERO server. We will use OMERO.py to interact with the OMERO server.
 
-**Setup**
----------
+Setup
+-----
 
 We recommend to install the dependencies using Conda.
 Conda manages programming environments in a manner similar to 

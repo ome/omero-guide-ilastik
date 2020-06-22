@@ -1,8 +1,8 @@
 Getting started with ilastik API and OMERO
 ==========================================
 
-**Description**
----------------
+Description
+-----------
 
 We will use a Python script showing how to analyze data stored in an OMERO server
 using the ilastik API. The code snippets are extracted from the Python script
@@ -12,7 +12,7 @@ is also available, see `pixel_classification.ipynb <https://mybinder.org/v2/gh/o
 
 We will show:
 
-- How to connect to server
+- How to connect to server.
 
 - How load images from a dataset using the OMERO API.
 
@@ -20,25 +20,25 @@ We will show:
 
 - How to save the generated results as OMERO images. If you are accessing a public resource e.g. idr.openmicroscopy.org, this step will not work.
 
-**Setup**
----------
+Setup
+-----
 
 We recommend to use a Conda environment to install ilastik and the OMERO Python bindings. Please read first :doc:`setup`.
 
-**Resources**
--------------
+Resources
+---------
 
 We will use an ilastik project created with ilastik version 1.3.3 to analyze 3D images of mouse blastocysts from the Image Data Resource (IDR).
 
-- :download:`ilastik model <../notebooks/pipelines/pixel-class-133.ilp>`
-- IDR data \ https://idr.openmicroscopy.org/webclient/?show=project-801
+- :download:`ilastik model <../notebooks/pipelines/pixel-class-133.ilp>`.
+- Images from IDR `idr0062 <https://idr.openmicroscopy.org/webclient/?show=project-801>`_.
 
 For convenience, the IDR data have been imported into the training
 OMERO.server. This is **only** because we **cannot** save results back to IDR
 which is a read-only OMERO.server.
 
-**Step-by-Step**
-----------------
+Step-by-Step
+------------
 
 In this section, we go over the various steps required to analyse the data.
 The script used in this document is :download:`pixel_classification.py <../scripts/pixel_classification.py>`.
@@ -83,8 +83,3 @@ When done, close the session:
 .. literalinclude:: ../scripts/pixel_classification.py
     :start-after: # Disconnect
     :end-before: # main
-
-
-**Exercises**
--------------
-
