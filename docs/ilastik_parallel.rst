@@ -72,7 +72,7 @@ When done, close the session:
     :start-after: # Disconnect
     :end-before: # Save results
 
-In order the use the methods implemented above in a proper standalone script:
+In order to use the methods implemented above in a proper standalone script:
 **Wrap it all up** in ``main``:
 
 .. literalinclude:: ../scripts/pixel_classification_zarr_parallel.py
