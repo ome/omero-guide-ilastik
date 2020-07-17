@@ -19,6 +19,7 @@ dependencies:
   - z5py
   - elf==0.2.1.post7  # ilastik-forge
   - fastfilters==0.2.6.post26  # ilastik-forge
+  - hytra==1.1.4.post66
   - ilastikrag==0.1.3.post38 # ilastik-forge
   - ilastiktools==0.2.post32 # ilastik-forge
   - ilastik-feature-selection  # ilastik-forge
