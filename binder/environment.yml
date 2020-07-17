@@ -17,15 +17,15 @@ dependencies:
   - vigra
   - yapsy
   - z5py
-  - elf  # ilastik-forge
-  - fastfilters  # ilastik-forge
-  - ilastikrag # ilastik-forge
-  - ilastiktools # ilastik-forge
+  - elf==0.2.1.post7  # ilastik-forge
+  - fastfilters==0.2.6.post26  # ilastik-forge
+  - ilastikrag==0.1.3.post38 # ilastik-forge
+  - ilastiktools==0.2.post32 # ilastik-forge
   - ilastik-feature-selection  # ilastik-forge
   - ilastik-meta==1.4.0b5  # ilastik-forge
-  - mamutexport  # ilastik-forge
-  - ndstructs  # ilastik-forge
-  - tiktorch  # ilastik-forge
+  - mamutexport==0.2.1.post5  # ilastik-forge
+  - ndstructs==0.0.1dev1  # ilastik-forge
+  - tiktorch==20.7.1  # ilastik-forge
   # display
   - ipywidgets
   # s3
