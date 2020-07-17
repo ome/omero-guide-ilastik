@@ -19,10 +19,12 @@ dependencies:
   - z5py
   - elf  # ilastik-forge
   - fastfilters  # ilastik-forge
+  - ilastikrag # ilastik-forge
+  - ilastiktools # ilastik-forge
   - ilastik-feature-selection  # ilastik-forge
+  - ilastik-meta==1.4.0b5  # ilastik-forge
   - mamutexport  # ilastik-forge
   - ndstructs  # ilastik-forge
-  - ilastik-meta==1.4.0b5  # ilastik-forge
   # display
   - ipywidgets
   # s3
