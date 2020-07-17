@@ -3,11 +3,29 @@ channels:
   - ome
   - ilastik-forge
 dependencies:
-  - omero-py
+  - omero-py  # ome
   - pip
-  - ilastik-dependencies-no-solvers==1.4
-  - ilastik-meta==1.4.0b5
+  #- ilastik-dependencies-no-solvers==1.4
+  # ilastik
+  - greenlet
+  - grpcio
+  - h5py
+  - tifffile
+  - scikit-image<=0.16
+  - scikit-learn==0.20
+  - yapsy
+  - vigra
+  - yapsy
+  - z5py
+  - elf  # ilastik-forge
+  - fastfilters  # ilastik-forge
+  - ilastik-feature-selection  # ilastik-forge
+  - mamutexport  # ilastik-forge
+  - ndstructs  # ilastik-forge
+  - ilastik-meta==1.4.0b5  # ilastik-forge
+  # display
   - ipywidgets
+  # s3
   - zarr  # for scripts reading from S3
   - dask  # for scripts reading from S3
   - pip:
