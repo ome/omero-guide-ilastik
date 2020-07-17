@@ -12,7 +12,7 @@ dependencies:
   - h5py
   - tifffile
   - scikit-image<=0.16
-  - scikit-learn==0.20
+  - scikit-learn
   - yapsy
   - vigra
   - yapsy
@@ -25,6 +25,7 @@ dependencies:
   - ilastik-meta==1.4.0b5  # ilastik-forge
   - mamutexport  # ilastik-forge
   - ndstructs  # ilastik-forge
+  - tiktorch  # ilastik-forge
   # display
   - ipywidgets
   # s3
