@@ -7,7 +7,7 @@ Description
 We will use a Python script showing how to analyze data stored in an OMERO server
 using the ilastik API. The code snippets are extracted from the Python script
 :download:`pixel_classification.py <../scripts/pixel_classification.py>`. A notebook
-is also available, see `pixel_classification.ipynb <https://mybinder.org/v2/gh/ome/omero-guide-ilastik/master?filepath=notebooks>`_.
+is also available, see `idr0062_pixel_classification.ipynb <https://mybinder.org/v2/gh/ome/omero-guide-ilastik/master?filepath=notebooks/pixel_classification.ipynb>`_.
 
 
 We will show:
