@@ -1,3 +1,13 @@
+0.2.1 (August 2020)
+-------------------
+
+- Install ome-zarr
+
+0.2.0 (July 2020)
+-----------------
+
+- Review ilastik installation dependencies
+
 0.1.0 (May 2020)
 ----------------
 
