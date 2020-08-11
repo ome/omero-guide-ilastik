@@ -9,6 +9,7 @@ dependencies:
   - greenlet
   - grpcio
   - h5py
+  - psutil
   - tifffile
   - scikit-image<=0.16
   - scikit-learn
@@ -28,8 +29,6 @@ dependencies:
   - tiktorch==20.7.1  # ilastik-forge
   # display
   - ipywidgets
-  # s3
-  - zarr  # for scripts reading from S3
-  - dask  # for scripts reading from S3
   - pip:
     - itkwidgets
+    - ome-zarr
