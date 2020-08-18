@@ -13,7 +13,7 @@ To run the notebooks, you can either [run on mybinder.org](https://mybinder.org/
 
 To build locally:
 
- * Install [Docker][https://www.docker.com/] if required
+ * Install [Docker](https://www.docker.com/) if required
  * Open a terminal as administrator
  * Create a virtual environment and install repo2docker from PyPI.
  * Clone this repository
