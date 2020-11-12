@@ -1,7 +1,7 @@
 channels:
-  - conda-forge
   - ome
   - ilastik-forge
+  - ilastik-forge/label/ilastik133
 dependencies:
   - omero-py  # ome
   - pip
@@ -27,8 +27,6 @@ dependencies:
   - mamutexport==0.2.1.post5  # ilastik-forge
   - ndstructs==0.0.1dev1  # ilastik-forge
   - tiktorch==20.7.1  # ilastik-forge
-  # display
-  - ipywidgets
   - pip:
     - itkwidgets
     - ome-zarr
