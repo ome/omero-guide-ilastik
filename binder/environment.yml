@@ -3,6 +3,7 @@ channels:
   - ilastik-forge
   - ilastik-forge/label/ilastik133
 dependencies:
+  - numba==0.48.0
   - omero-py  # ome
   - pip
   # ilastik
@@ -15,7 +16,6 @@ dependencies:
   - scikit-learn
   - yapsy
   - vigra
-  - yapsy
   - z5py
   - elf==0.2.1.post7  # ilastik-forge
   - fastfilters==0.2.6.post26  # ilastik-forge
