@@ -1,5 +1,7 @@
 channels:
   - ome
+  - anaconda
+  - conda-forge
   - ilastik-forge
   - ilastik-forge/label/ilastik133
 dependencies:
@@ -12,21 +14,21 @@ dependencies:
   - h5py
   - psutil
   - tifffile
-  - scikit-image<=0.16
+  - scikit-image
   - scikit-learn
-  - yapsy
   - vigra
   - z5py
-  - elf==0.2.1.post7  # ilastik-forge
-  - fastfilters==0.2.6.post26  # ilastik-forge
-  - hytra==1.1.4.post66 # ilastik-forge
-  - ilastikrag==0.1.3.post38 # ilastik-forge
-  - ilastiktools==0.2.post32 # ilastik-forge
-  - ilastik-feature-selection  # ilastik-forge
+  - ilastik-forge/label/ilastik133::elf  # ilastik-forge
+  - fastfilters  # ilastik-forge
+  - hytra # ilastik-forge
+  - ilastik-forge/label/ilastik133::ilastikrag # ilastik-forge
+  - ilastik-forge/label/ilastik133::ilastiktools # ilastik-forge
+  - ilastik-forge/label/ilastik133::ilastik-feature-selection  # ilastik-forge
   - ilastik-meta==1.4.0b5  # ilastik-forge
-  - mamutexport==0.2.1.post5  # ilastik-forge
-  - ndstructs==0.0.1dev1  # ilastik-forge
-  - tiktorch==20.7.1  # ilastik-forge
+  - ilastik-forge/label/ilastik133::mamutexport  # ilastik-forge
+  - ilastik-forge/label/ilastik133::ndstructs  # ilastik-forge
+  - ilastik-forge::tiktorch  # ilastik-forge
   - pip:
+    - yapsy
     - itkwidgets
     - ome-zarr
