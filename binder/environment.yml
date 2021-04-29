@@ -1,34 +1,17 @@
 channels:
-  - ome
   - anaconda
   - conda-forge
   - ilastik-forge
-  - ilastik-forge/label/ilastik133
+  - ome
 dependencies:
   - numba==0.48.0
-  - xarray
   - omero-py  # ome
   - pip
+  - ipywidgets
   # ilastik
-  - greenlet
-  - grpcio
   - h5py<3.2
-  - psutil
-  - tifffile
-  - scikit-image
-  - scikit-learn
-  - vigra
-  - z5py
-  - elf  # ilastik-forge
-  - fastfilters  # ilastik-forge
-  - hytra # ilastik-forge
-  - ilastikrag # ilastik-forge
-  - ilastiktools # ilastik-forge
-  - ilastik-feature-selection  # ilastik-forge
-  - ilastik-forge/label/ilastik140::ilastik-meta  # ilastik-forge
-  - mamutexport  # ilastik-forge
-  - ndstructs  # ilastik-forge
-  - tiktorch  # ilastik-forge
+  - ilastik-dependencies-no-solvers==1.4.3
+  - ilastik-forge/label/ilastik140::ilastik-meta==1.4.0b14  # ilastik-forge
   - pip:
     - yapsy
     - itkwidgets
