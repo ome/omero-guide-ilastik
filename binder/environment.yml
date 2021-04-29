@@ -6,28 +6,29 @@ channels:
   - ilastik-forge/label/ilastik133
 dependencies:
   - numba==0.48.0
+  - xarray
   - omero-py  # ome
   - pip
   # ilastik
   - greenlet
   - grpcio
-  - h5py
+  - h5py<3.2
   - psutil
   - tifffile
   - scikit-image
   - scikit-learn
   - vigra
   - z5py
-  - ilastik-forge/label/ilastik133::elf  # ilastik-forge
+  - elf  # ilastik-forge
   - fastfilters  # ilastik-forge
   - hytra # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastikrag # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastiktools # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastik-feature-selection  # ilastik-forge
-  - ilastik-meta==1.4.0b5  # ilastik-forge
-  - ilastik-forge/label/ilastik133::mamutexport  # ilastik-forge
-  - ilastik-forge/label/ilastik133::ndstructs  # ilastik-forge
-  - ilastik-forge::tiktorch  # ilastik-forge
+  - ilastikrag # ilastik-forge
+  - ilastiktools # ilastik-forge
+  - ilastik-feature-selection  # ilastik-forge
+  - ilastik-forge/label/ilastik140::ilastik-meta  # ilastik-forge
+  - mamutexport  # ilastik-forge
+  - ndstructs  # ilastik-forge
+  - tiktorch  # ilastik-forge
   - pip:
     - yapsy
     - itkwidgets
