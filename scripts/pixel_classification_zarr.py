@@ -33,10 +33,11 @@ import dask.array as da
 import omero.clients
 from omero.gateway import BlitzGateway
 from getpass import getpass
-from collections import OrderedDict
+
 
 from ilastik import app
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
+import vigra
 
 
 # Connect to the server
@@ -124,11 +125,7 @@ def analyze(conn, images, model, new_dataset, extension=".tar", resolution=0):
         input_data = load_from_s3(image, path)
         # run ilastik headless
         print('running ilastik using %s and %s' % (model, image.getName()))
-        data = OrderedDict([
-            (
-                "Raw Data",
-                [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
-            )])
+        data = [ {"Raw Data": PreloadedArrayDatasetInfo(preloaded_array=input_data, axistags=vigra.defaultAxistags("tzyxc"))}]  # noqa
         shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
     elapsed = time.time() - start
     print(elapsed)

@@ -37,6 +37,7 @@ from ilastik import app
 from ilastik.applets.dataSelection.opDataSelection import PreloadedArrayDatasetInfo  # noqa
 
 import time
+import vigra
 
 
 # Connect to the server
@@ -75,11 +76,7 @@ def analyze(image_id, model):
     shell = app.main(args)
     input_data = load_from_s3(image_id)
     # run ilastik headless
-    data = OrderedDict([
-        (
-            "Raw Data",
-            [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
-        )])
+    data = [ {"Raw Data": PreloadedArrayDatasetInfo(preloaded_array=input_data, axistags=vigra.defaultAxistags("tzyxc"))}]  # noqa
     return shell.workflow.batchProcessingApplet.run_export(data, export_to_array=True)  # noqa
 
 
