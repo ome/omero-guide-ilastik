@@ -1,33 +1,18 @@
 channels:
-  - ome
   - anaconda
   - conda-forge
   - ilastik-forge
-  - ilastik-forge/label/ilastik133
+  - ome
 dependencies:
   - numba==0.48.0
   - omero-py  # ome
   - pip
+  - ipywidgets
   # ilastik
-  - greenlet
-  - grpcio
-  - h5py
-  - psutil
-  - tifffile
-  - scikit-image
-  - scikit-learn
-  - vigra
-  - z5py
-  - ilastik-forge/label/ilastik133::elf  # ilastik-forge
-  - fastfilters  # ilastik-forge
-  - hytra # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastikrag # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastiktools # ilastik-forge
-  - ilastik-forge/label/ilastik133::ilastik-feature-selection  # ilastik-forge
-  - ilastik-meta==1.4.0b5  # ilastik-forge
-  - ilastik-forge/label/ilastik133::mamutexport  # ilastik-forge
-  - ilastik-forge/label/ilastik133::ndstructs  # ilastik-forge
-  - ilastik-forge::tiktorch  # ilastik-forge
+  # see https://github.com/h5py/h5py/issues/1880
+  - h5py<3.2
+  - ilastik-dependencies-no-solvers==1.4.3
+  - ilastik-forge/label/ilastik140::ilastik-meta==1.4.0b14  # ilastik-forge
   - pip:
     - yapsy
     - itkwidgets

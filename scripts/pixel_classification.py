@@ -113,11 +113,7 @@ def analyze(conn, images, model, new_dataset):
         input_data = load_numpy_array(image)
         # run ilastik headless
         print('running ilastik using %s and %s' % (model, image.getName()))
-        data = OrderedDict([
-            (
-                "Raw Data",
-                [PreloadedArrayDatasetInfo(preloaded_array=input_data)],
-            )])
+        data = [ {"Raw Data": PreloadedArrayDatasetInfo(preloaded_array=input_data, axistags=vigra.defaultAxistags("tzyxc"))}]  # noqa
         predictions = shell.workflow.batchProcessingApplet.run_export(data,
                                                                       export_to_array=True)  # noqa
         for d in predictions:
