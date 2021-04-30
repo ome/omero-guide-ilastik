@@ -1,3 +1,7 @@
+0.3.0 (April 2021)
+------------------
+- Bump ilastik version and adjust notebook and script ([#29](https://github.com/ome/omero-guide-ilastik/pull/29))
+
 0.2.3 (January 2021)
 --------------------
 
