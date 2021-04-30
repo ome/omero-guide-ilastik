@@ -9,6 +9,7 @@ dependencies:
   - pip
   - ipywidgets
   # ilastik
+  # see https://github.com/h5py/h5py/issues/1880
   - h5py<3.2
   - ilastik-dependencies-no-solvers==1.4.3
   - ilastik-forge/label/ilastik140::ilastik-meta==1.4.0b14  # ilastik-forge
