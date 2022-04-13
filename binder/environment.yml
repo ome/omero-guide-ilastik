@@ -2,10 +2,9 @@ channels:
   - anaconda
   - conda-forge
   - ilastik-forge
-  - ome
 dependencies:
   #- numba==0.48.0
-  - omero-py  # ome
+  - omero-py
   - pip
   - ipywidgets
   - tornado<6
