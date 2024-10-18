@@ -1,5 +1,4 @@
 # Guide on how to integrate ilastik and OMERO
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ome/omero-guide-ilastik/master?filepath=notebooks)
 [![Documentation Status](https://readthedocs.org/projects/omero-guide-ilastik/badge/?version=latest)](https://omero-guides.readthedocs.io/en/latest/ilastik/docs/index.html)
 [![Actions Status](https://github.com/ome/omero-guide-ilastik/workflows/repo2docker/badge.svg)](https://github.com/ome/omero-guide-ilastik/actions)
 
