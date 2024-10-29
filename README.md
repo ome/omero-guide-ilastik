@@ -51,11 +51,9 @@ The following steps are only required if you want to run the notebooks.
 
 * If you have Anaconda installed:
   * Start Jupyter from the Anaconda-navigator
-  * In the conda environment, run ``mamba install ipykernel`` (for OS X Apple Silicon ``CONDA_SUBDIR=osx-64 mamba install ipykernel``)
   * To register the environment, run ``python -m ipykernel install --user --name omero-guide-ilastik``
   * Select the notebook you wish to run and select the ``Kernel>Change kernel>Python [conda env:omero-guide-ilastik]`` or ``Kernel>Change kernel>omero-guide-ilastik``
 * If Anaconda is not installed:
-  * Add the virtualenv as a jupyter kernel i.e. ``ipython kernel install --name "omero-guide-ilastik" --user``
   * Open jupyter notebook i.e. ``jupyter notebook`` and select the ``omero-guide-ilastik`` kernel or ``[conda env:omero-guide-ilastik]`` according to what is available.
 
   To stop the notebook server, in the terminal where te server is running, press ``Ctrl C``. The following question will be asked in the terminal ``Shutdown this notebook server (y/[n])?``. Enter the desired choice.
