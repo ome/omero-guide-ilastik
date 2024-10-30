@@ -9,9 +9,7 @@ dependencies:
   - pip
   - ipywidgets==7.8.5
   - ilastik-forge::ilastik==1.4.1b22
-  - tornado==6.1
   - ipykernel==6.29.5
   - pip:
     - yapsy==1.12.2
-    - itkwidgets==0.32.6
     - ome-zarr==0.9.0
