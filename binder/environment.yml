@@ -4,6 +4,7 @@ channels:
   - conda-forge
   - ilastik-forge
 dependencies:
+  - python==3.9.*
   - omero-py==5.19.*
   - pip
   - ipywidgets==7.8.5
