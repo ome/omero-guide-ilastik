@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 #
-# Copyright (c) 2020 University of Dundee.
+# Copyright (c) 2020-2024 University of Dundee.
 #
 #   Redistribution and use in source and binary forms, with or without modification, 
 #   are permitted provided that the following conditions are met:
@@ -169,7 +169,7 @@ def main():
         conn.c.enableKeepAlive(60)
 
         # path to the ilastik project
-        ilastik_project = "../notebooks/pipelines/pixel-class-133.ilp"
+        ilastik_project = "../notebooks/pipelines/ilastik14-Nov-2024.ilp"
 
         # Load the images in the dataset
         images = load_images(conn, dataset_id)
