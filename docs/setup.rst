@@ -1,75 +1,59 @@
 Install ilastik and OMERO Python bindings
 ==========================================
 
-In this section, we show how to install ilastik in a `Conda <https://conda.io/en/latest/>`_ environment.
+In this section, we show how to install ilastik in a virtual environment.
 We will use the ilastik API to analyze data stored in an OMERO server. We will use OMERO.py to interact with the OMERO server.
 
 Setup
 -----
 
-We recommend to install the dependencies using Conda.
-Conda manages programming environments in a manner similar to 
-`virtualenv <https://virtualenv.pypa.io/en/stable/>`_.
-You can install the various dependencies following the steps below (Option 1) or build locally a Docker Image
-using ``repo2docker`` (Option 2). When the installation is done, you should be ready to use the ilastik API and OMERO, see :doc:`gettingstarted`.
+We recommend to install the dependencies using `Mamba <https://mamba.readthedocs.io>`_.
 
-The installation below is needed to run the scripts and/or notebooks. If you wish to start your own environment without the scripts/notebooks, copy locally into an ``environment.yml`` file the content of 
-`binder/environment.yml <https://raw.githubusercontent.com/ome/omero-guide-ilastik/master/binder/environment.yml>`_, remove or add the dependencies you need and run the commands below to create a conda environment.
+* If you do not have any pre-existing conda installation, `install Mamba <https://mamba.readthedocs.io/en/latest/installation.html#installation>`_ and use `mambaforge <https://github.com/conda-forge/miniforge#mambaforge>`_
+* In case you have a pre-existing conda installation, you can install Mamba by either:
 
-*Option 1*
-~~~~~~~~~~
+  * Using the recommended way to install Mamba from `mambaforge <https://github.com/conda-forge/miniforge#mambaforge>`_. This will not invalidate your conda installation, but possibly your pre-existing conda envs will be in a different location (e.g. ``/Users/USER_NAME/opt/anaconda3/envs/``) then the new mamba envs (e.g. ``/Users/USER_NAME/mambaforge/envs/``). You can verify this by running ``conda env list``. The addition of ``export CONDA_ENVS_PATH=/Users/user/opt/anaconda3/envs/`` into your ``.bashprofile`` or ``.zprofile`` file will fix this. 
+  * Use the `Existing conda install <https://mamba.readthedocs.io/en/latest/installation.html#existing-conda-install>`_ way, i.e. run ``conda install mamba -n base -c conda-forge`` whilst in the base environment. This way can take much longer time than the recommended way described above, and might not lead to a successful installation, especially if run on arm64 (Apple Silicon) OS X.
 
-- Install `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ if necessary.
+Create the environment running the commands below as written:
 
-- If you do not have a local copy of the `omero-guide-ilastik repository <https://github.com/ome/omero-guide-ilastik>`_, first clone the repository::
+For Windows, OS X x86_64 (NOT arm64 Apple Silicon), Linux::
 
-    $ git clone https://github.com/ome/omero-guide-ilastik.git
-
-- Go into the directory::
-
+    $ git clone https://github.com/ome/omero-guide-ilastik
+    
     $ cd omero-guide-ilastik
 
-- Create a programming environment using Conda::
+    $ mamba env create -f binder/environment.yml
 
-    $ conda create -n ilastik python=3.7
+For OS X arm64 Apple Silicon::
 
-- Install ilastik, its dependencies and ``omero-py`` in order to connect to an OMERO server using an installation file::
+    $ git clone https://github.com/ome/omero-guide-ilastik 
+    
+    $ cd omero-guide-ilastik
+    
+    $ CONDA_SUBDIR=osx-64 mamba env create -f binder/environment.yml
 
-    $ conda env update -n ilastik --file binder/environment.yml 
+and activate the newly created environment::
 
-- Activate the environment::
+    $ conda activate omero-guide-ilastik
 
-    $ conda activate ilastik
 
-- Make sure that ``ilastik-meta`` can be executed::
-   
-    $ chmod -R +x PATH_TO_CONDA/envs/ilastik/ilastik-meta
+Before creating a new environment, remember to deactivate the current one::
 
-*Option 2*
-~~~~~~~~~~
+    $ conda deactivate
 
-Alternatively you can create a local Docker Image using ``repo2docker``, see :download:`README.md <https://github.com/ome/omero-guide-ilastik/blob/master/README.md>`::
+See also `Conda command reference <https://docs.conda.io/projects/conda/en/latest/commands.html>`_.
 
-    $ repo2docker .
+The following steps are only required if you want to run the notebooks.
 
-When the Image is ready:
+* If you have Anaconda installed:
 
-- Copy the URL displayed in the terminal in your favorite browser
+  * Start Jupyter from the Anaconda-navigator
+  * To register the environment, run ``python -m ipykernel install --user --name omero-guide-ilastik``
+  * Select the notebook you wish to run and select the ``Kernel>Change kernel>Python [conda env:omero-guide-ilastik]`` or ``Kernel>Change kernel>omero-guide-ilastik``.
 
-- Click the ``New`` button on the right-hand side of the window
+* If Anaconda is not installed:
 
-- Select ``Terminal``
+  * Open jupyter notebook i.e. ``jupyter notebook`` and select the ``omero-guide-ilastik`` kernel or ``[conda env:omero-guide-ilastik]`` according to what is available.
 
-.. image:: images/terminal.png
-
-- A Terminal will open in a new Tab
-
-- A Conda environment has already been created when the Docker Image was built
-
-- To list all the Conda environment, run::
-
-    $ conda env list
-
-- The environment with ilastik and the OMERO Python bindings is named ``notebook``, activate it::
-
-    $ conda activate notebook
+  To stop the notebook server, in the terminal where te server is running, press ``Ctrl C``. The following question will be asked in the terminal ``Shutdown this notebook server (y/[n])?``. Enter the desired choice.
