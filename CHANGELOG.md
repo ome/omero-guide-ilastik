@@ -1,7 +1,13 @@
+0.3.2 (November 2024)
+---------------------
+
+- Review installation and notebooks ([#36](https://github.com/ome/omero-guide-ilastik/pull/36))
+
+
 0.3.1 (April 2021)
 ------------------
 
-- Add screenshot to IDR notebook and cap tornado ([#30](https://github.com/ome/omero-guide-ilastik/pull/230))
+- Add screenshot to IDR notebook and cap tornado ([#30](https://github.com/ome/omero-guide-ilastik/pull/30))
 
 0.3.0 (April 2021)
 ------------------
