@@ -1,3 +1,9 @@
+0.3.3 (November 2024)
+---------------------
+
+- Update installation instructions
+
+
 0.3.2 (November 2024)
 ---------------------
 
