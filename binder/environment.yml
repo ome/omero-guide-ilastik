@@ -1,19 +1,15 @@
+name: omero-guide-ilastik
 channels:
   - anaconda
   - conda-forge
   - ilastik-forge
 dependencies:
-  #- numba==0.48.0
-  - omero-py
+  - python==3.9.*
+  - omero-py==5.19.*
   - pip
-  - ipywidgets
-  - tornado<6
-  # ilastik
-  # see https://github.com/h5py/h5py/issues/1880
-  - h5py<3.2
-  - ilastik-dependencies-no-solvers==1.4.3
-  - ilastik-forge/label/ilastik140::ilastik-meta==1.4.0b14  # ilastik-forge
+  - ipywidgets==7.8.5
+  - ilastik-forge::ilastik==1.4.1b22
+  - ipykernel==6.29.5
   - pip:
-    - yapsy
-    - itkwidgets
-    - ome-zarr
+    - yapsy==1.12.2
+    - ome-zarr==0.9.0
