@@ -10,6 +10,5 @@ dependencies:
   - ipywidgets==7.8.5
   - ilastik-forge::ilastik==1.4.1b22
   - ipykernel==6.29.5
-  - pip:
-    - yapsy==1.12.2
-    - ome-zarr==0.9.0
+  - yapsy==1.12.2
+  - ome-zarr==0.9.0
