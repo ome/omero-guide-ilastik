@@ -1,8 +1,8 @@
 name: omero-guide-ilastik
 channels:
-  - anaconda
   - conda-forge
   - ilastik-forge
+  - nodefaults
 dependencies:
   - python==3.9.*
   - omero-py==5.19.*
