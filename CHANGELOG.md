@@ -1,3 +1,11 @@
+0.3.4 (November 2024)
+---------------------
+
+- Remove dependency ([#39](https://github.com/ome/omero-guide-ilastik/pull/39))
+- Fix Fiji workflow ([#37](https://github.com/ome/omero-guide-ilastik/pull/37))
+- Simplify installation instructions ([#37](https://github.com/ome/omero-guide-ilastik/pull/37)) (Thanks to Dominik Kutra)
+
+
 0.3.3 (November 2024)
 ---------------------
 
