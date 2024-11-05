@@ -55,7 +55,7 @@ Scripting workflow on z-stacks using ilastik headless, Fiji and OMERO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For this example we will use the Groovy script :download:`analyse_dataset_ilastik.groovy <../scripts/analyse_dataset_ilastik.groovy>`.
-The script uses the OMERO `JAVA API <https://docs.openmicroscopy.org/latest/omero/developers/Java.html>`_.
+The script uses the `OMERO Java API <https://docs.openmicroscopy.org/latest/omero/developers/Java.html>`_.
 
 Connect to the server:
 
