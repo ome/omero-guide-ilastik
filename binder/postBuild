@@ -1,4 +1,0 @@
-#!/bin/bash
-set -eux
-
-chmod -R +x /srv/conda/envs/notebook/ilastik-meta
