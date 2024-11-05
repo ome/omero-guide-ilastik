@@ -145,7 +145,7 @@ Manual creation of ROIs in Fiji based on segmentations from ilastik and saving t
 
     .. image:: images/ilastik9.png
 
-#.  Note: Because in ilastik, the ``Simple Segmentatio` images have the values of 2 where there is an object and 1 for Background, we need to invert the image for Object Analysis in Fiji. The object analysis (done by the ``Analyze particles`` plugin) is done in order to create ROIs which can be saved to OMERO.
+#.  Note: Because in ilastik, the ``Simple Segmentatio`` images have the values of 2 where there is an object and 1 for Background, we need to invert the image for object analysis in Fiji. The object analysis (done by the ``Analyze particles`` plugin) is done in order to create ROIs which can be saved to OMERO.
 
 #.  Select ``Image > 8 bit``. This will convert the values in the image into either 0 (cells) or 255 (background).
 
@@ -224,7 +224,7 @@ Manual workflow of Object classification on z-stacks in ilastik
 
 #. Import the CSV to OMERO, as well as the Probabilities.
 
-#. Make an OMERO.table out of the CSV and attach it on the Project in OMERO. This can be done using populate_metadata.py plugin or from scratch using the extended groovy script from Fiji.
+#. Make an OMERO.table out of the CSV and attach it on the Project in OMERO. This can be done using `omero-metadata <https://pypi.org/project/omero-metadata/>`_ plugin or from scratch using the extended groovy script from Fiji.
 
 
 .. |image0| image:: images/ilastik5.png
