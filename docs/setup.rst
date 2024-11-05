@@ -8,7 +8,7 @@ Setup
 -----
 
 We recommend to install the dependencies using `Conda <https://docs.conda.io>`_.
-In case you do not have a conda installation we recommend downloading and installing the latest version of `Miniforge <https://github.com/conda-forge/miniforge?tab=readme-ov-file#download>`_.
+In case you do not have a conda installation we recommend downloading and installing the latest version of `Miniforge <https://github.com/conda-forge/miniforge>`_.
 
 Create the environment running the commands below as written:
 
